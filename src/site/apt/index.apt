@@ -1,0 +1,19 @@
+
+jFuzzyDate
+
+ jFuzzyDate is a lightweight java library for formatting easily readable time
+ distances and dates.
+ 
+ Examples: 
+ 
+	* A duration of "16d 02:30:40" may formatted as "two weeks".
+	
+	* Looking about 50 days in the past may be formatted to "two months ago".
+ 
+ It is open source and released under the GNU Lesser Public License (LGPL).
+ 
+~~* Why should you use it?
+
+~~ With increasing distance in time users begin 
+ 
+ 

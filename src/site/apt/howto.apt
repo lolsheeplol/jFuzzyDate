@@ -1,0 +1,39 @@
+
+How to use jFuzzyDate?
+  
+* Downloading and importing jFuzzyDate
+
+ Preparing yourself to use jFuzzyDate is quite easy.
+ Simply download the lastest package from sourceforge {{download.html}}.
+ Unzip the downloaded package and copy the <<<jfuzzydate.jar>>> file into your project.
+
+ Declare to following imports in your java files to start:
+
+---
+import net.sf.jfuzzydate.FuzzyDateFormat;
+import net.sf.jfuzzydate.FuzzyDateFormatter;
+---
+
+* Formatting relative distances
+
+ Distances are formatted using the <<<format(Date)>>> method.
+ Use this method to show distances to appointments or last modifications of documents.
+
+---
+FuzzyDateFormatter format = FuzzyDateFormat.getInstance();
+String someDaysAgo = format.format(dateInThePast);
+String inSomeDays  = format.format(dateInTheFuture);
+---
+ 
+* Formatting durations
+
+ Durations are formatted using the <<<formatDuration(...)>>> methods. Typically you would call
+ this method with millisecond value. This method returns a string representing a readable duration.
+ Use this method to visualize the time between starting and end dates or generic durations, 
+ such as cooking times, appointent durations or project lifecycle phase spans.
+
+---
+FuzzyDateFormatter format = FuzzyDateFormat.getInstance();
+String aMinute = format.formatDuration(60000);
+String uneHeure = format.formatDuration(3600000, Locale.FRENCH);
+---
