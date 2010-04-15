@@ -4,16 +4,49 @@ jFuzzyDate
  jFuzzyDate is a lightweight java library for formatting easily readable time
  distances and dates.
  
- Examples: 
+ It is easy to use, fully internationalizable and designed to extensible.
  
-	* A duration of "16d 02:30:40" may formatted as "two weeks".
-	
-	* Looking about 50 days in the past may be formatted to "two months ago".
+ Please note: This library is currently in an early alpha state and may change without further notice. 
  
- It is open source and released under the GNU Lesser Public License (LGPL).
  
-~~* Why should you use it?
+* Why should you use jFuzzyDate for formatting time values?
 
-~~ With increasing distance in time users begin 
+ * Creates human readable durations and distances of time instead of cryptic number columns.
+ 
+ * It's {{{howto.html}easy to implement.}}
+ 
+ * Full internationalization support and a set of existing translations.
+ 
+ * It's a very small library with small footprint.
+ 
+ * It is open source.
+ 
+ * Makes use of business friendly licensing.
+ 
+
+* Examples 
+
+ The following table shows some examples of how dates and millisecond values get 
+ transformed into human readable string representations by jFuzzyDate.
+
+*------------+---------------------+---------------------------------+
+| <<Type>>   | <<Traditional>>     | <<Made readable by jFuzzyDate>> |
+*------------+---------------------+---------------------------------+
+| Distance   | -84d                | 3 months ago                    |
+*------------+---------------------+---------------------------------+
+|            | 00:05:20            | in 5 minutes                    |
+*------------+---------------------+---------------------------------+
+|            | 01:02:03            | in an hour                      |
+*------------+---------------------+---------------------------------+
+| Duration   | 16d 02:30:40        | two weeks                       |
+*------------+---------------------+---------------------------------+
+|            | 55s                 | a minute                        |
+*------------+---------------------+---------------------------------+
+
+ 
+* License Information 
+ 
+ jFuzzyDate is open source and released under the {{{license.html}GNU Lesser Public License (LGPL)}}.
+ 
  
  

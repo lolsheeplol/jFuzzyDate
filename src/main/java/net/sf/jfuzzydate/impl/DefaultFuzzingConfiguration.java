@@ -8,7 +8,7 @@ import java.util.Locale;
 
 
 /**
- * 
+ * A very simple and static configuration for fuzzy date formatting.
  *
  * @author ma³
  */
@@ -16,12 +16,16 @@ public final class DefaultFuzzingConfiguration implements FuzzingConfiguration {
     //~ Static fields/initializers ---------------------------------------------
 
     /**
-     * 
+     * The singleton instance.
      */
     private static DefaultFuzzingConfiguration instance;
 
     /**
-     * 
+     * The internationalization resource bundle name for looking up the
+     * strings of this configuration.
+     *
+     * @see #getFuzzyString(Range, Locale, Object...)
+     * @see #getFuzzyString(String, Locale, Object...)
      */
     private static final String FUZZY_STRING_BUNDLE = "net.sf.jfuzzydate.i18n.jFuzzyDate";
 
@@ -96,9 +100,10 @@ public final class DefaultFuzzingConfiguration implements FuzzingConfiguration {
     //~ Methods ----------------------------------------------------------------
 
     /**
-     * 
+     * This static method returns a shared instance of this default
+     * configuration class.
      *
-     * @return 
+     * @return a DefaultFuzzingConfiguration istance.
      */
     public static DefaultFuzzingConfiguration getInstance() {
         if (instance == null) {
@@ -109,9 +114,9 @@ public final class DefaultFuzzingConfiguration implements FuzzingConfiguration {
     }
 
     /* (non-Javadoc)
-     * @see net.sf.jfuzzydate.FuzzingConfiguration#getDistanceIntervals(net.sf.jfuzzydate.FuzzingStrength)
+     * @see net.sf.jfuzzydate.FuzzingConfiguration#getDistanceRanges(net.sf.jfuzzydate.FuzzingStrength)
      */
-    public Range[] getDistanceIntervals(FuzzingStrength strenght) {
+    public Range[] getDistanceRanges(FuzzingStrength strenght) {
         final Range[] ranges;
 
         switch (strenght) {
@@ -140,9 +145,9 @@ public final class DefaultFuzzingConfiguration implements FuzzingConfiguration {
     }
 
     /* (non-Javadoc)
-     * @see net.sf.jfuzzydate.FuzzingConfiguration#getDurationIntervals(net.sf.jfuzzydate.FuzzingStrength)
+     * @see net.sf.jfuzzydate.FuzzingConfiguration#getDurationRanges(net.sf.jfuzzydate.FuzzingStrength)
      */
-    public Range[] getDurationIntervals(FuzzingStrength strenght) {
+    public Range[] getDurationRanges(FuzzingStrength strenght) {
         final Range[] ranges;
 
         switch (strenght) {

@@ -20,4 +20,8 @@ public final class FuzzyDateFormat {
     public static final FuzzyDateFormatter getInstance() {
         return new FuzzyDateFormatImpl(DefaultFuzzingConfiguration.getInstance());
     }
+    
+    public static final FuzzyDateFormatter getInstance(FuzzingConfiguration config) {
+    	return new FuzzyDateFormatImpl(config);
+    }
 }

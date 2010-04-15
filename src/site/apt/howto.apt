@@ -1,10 +1,10 @@
 
 How to use jFuzzyDate?
   
-* Downloading and importing jFuzzyDate
+* Downloading and Importing jFuzzyDate
 
- Preparing yourself to use jFuzzyDate is quite easy.
- Simply download the lastest package from sourceforge {{download.html}}.
+ Preparing yourself to use jFuzzyDate is quite simple.
+ Download the {{{download.html}lastest package}}.
  Unzip the downloaded package and copy the <<<jfuzzydate.jar>>> file into your project.
 
  Declare to following imports in your java files to start:
@@ -14,7 +14,7 @@ import net.sf.jfuzzydate.FuzzyDateFormat;
 import net.sf.jfuzzydate.FuzzyDateFormatter;
 ---
 
-* Formatting relative distances
+* Formatting Distances - e.g. <two minutes ago>
 
  Distances are formatted using the <<<format(Date)>>> method.
  Use this method to show distances to appointments or last modifications of documents.
@@ -25,7 +25,7 @@ String someDaysAgo = format.format(dateInThePast);
 String inSomeDays  = format.format(dateInTheFuture);
 ---
  
-* Formatting durations
+* Formatting Durations - e.g. <an hour> 
 
  Durations are formatted using the <<<formatDuration(...)>>> methods. Typically you would call
  this method with millisecond value. This method returns a string representing a readable duration.
@@ -37,3 +37,24 @@ FuzzyDateFormatter format = FuzzyDateFormat.getInstance();
 String aMinute = format.formatDuration(60000);
 String uneHeure = format.formatDuration(3600000, Locale.FRENCH);
 ---
+
+
+* Formatting Foreign Languages - e.g. <une heure> 
+
+ Each formatting method has an optional locale parameter which can be used to define the formatting language.
+  
+---
+FuzzyDateFormatter format = FuzzyDateFormat.getInstance();
+String uneHeure = format.formatDuration(3600000, Locale.FRENCH);
+---
+
+
+* Translation and localization of jFuzzyDate
+
+ This topic has it's own page: {{{i18n.html}Internationalization}}.
+
+* Custom formatting configurations
+
+ jFuzzyDate is able to be extended by custom and dynamic configurations. 
+ Have a look at <<<net.sf.jfuzzydate.FuzzingConfiguration>>> for implementation
+ notes.

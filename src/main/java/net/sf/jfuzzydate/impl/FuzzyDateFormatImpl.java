@@ -28,7 +28,7 @@ public class FuzzyDateFormatImpl implements FuzzyDateFormatter {
      *
      * @param config 
      */
-    public FuzzyDateFormatImpl(DefaultFuzzingConfiguration config) {
+    public FuzzyDateFormatImpl(FuzzingConfiguration config) {
         this.config = config;
     }
 
@@ -86,7 +86,7 @@ public class FuzzyDateFormatImpl implements FuzzyDateFormatter {
     }
 
     /**
-     * 
+     * DOCUMENT ME!
      *
      * @param l
      * @param normal
@@ -99,7 +99,7 @@ public class FuzzyDateFormatImpl implements FuzzyDateFormatter {
     }
 
     /**
-     * 
+     * DOCUMENT ME!
      *
      * @param distanceSec
      * @param strength
@@ -120,7 +120,7 @@ public class FuzzyDateFormatImpl implements FuzzyDateFormatter {
 
         final long absDistance = Math.abs(distanceSec);
 
-        for (final Range range : config.getDistanceIntervals(strength)) {
+        for (final Range range : config.getDistanceRanges(strength)) {
             if (absDistance < range.getUpperBound()) {
                 if (range.hasDivisor()) {
                     final int parameter = Math.round(absDistance / range.getParameterDivisor());
@@ -141,18 +141,18 @@ public class FuzzyDateFormatImpl implements FuzzyDateFormatter {
     }
 
     /**
-     * 
+     * DOCUMENT ME!
      *
      * @param milliSeconds
      * @param strength
      * @param locale
      *
-     * @return 
+     * @return
      */
     private String formatDuration(final long milliSeconds,
                                   final FuzzingStrength strength,
                                   final Locale locale) {
-        for (final Range range : config.getDurationIntervals(strength)) {
+        for (final Range range : config.getDurationRanges(strength)) {
             if (milliSeconds < range.getUpperBound()) {
                 if (range.hasDivisor()) {
                     final int parameter = Math.round(milliSeconds / range.getParameterDivisor());

@@ -1,4 +1,31 @@
 
 Internationalization 
  
- TODO
+* Translation
+ 
+ Translating jFuzzyDate is very easy. String representations of readable date formats
+ are stored in standardized java resource bundles (.property files). 
+ Add a translation for your language by
+ 
+ [[1]] Switch into the source folder <<<net/sf/jfuzzydate/i18n/>>>.   
+    
+ [[2]] Copy an existing language file of your choice
+  (e.g. for generic english choose <<<jFuzzyDate_en.properties>>>)
+  to a file of your locale 
+  (e.g. french would be <<<jFuzzyDate_en_US.properties>>>).
+	  
+ [[3]] Open the file and edit the format strings.
+ 
+ []
+ 
+ Have a look at {{http://java.sun.com/developer/technicalArticles/Intl/ResourceBundles/}} 
+ for more information about java resource bundles.
+ 
+* Localization
+
+ coming soon
+
+* Contributing your efforts
+ 
+ Your contributions are welcome. Please feel free to send your internationalizations
+ to the project team.
