@@ -16,10 +16,13 @@ import java.util.Locale;
 public class FuzzyDateFormatImplTest {
     //~ Static fields/initializers ---------------------------------------------
 
+	private static final int SECONDS_HOUR = 60*60;
+
+	
     /**
      * 
      */
-    private static final int SECONDS_DAY = 60 * 60 * 24;
+    private static final int SECONDS_DAY = SECONDS_HOUR * 24;
 
     /**
      * 
@@ -35,7 +38,8 @@ public class FuzzyDateFormatImplTest {
      * 
      */
     private static final int SECONDS_YEAR = SECONDS_DAY * 256;
-
+    
+    
     //~ Methods ----------------------------------------------------------------
 
     /**
@@ -73,6 +77,10 @@ public class FuzzyDateFormatImplTest {
                      impl.formatDistance(new Date(new Date().getTime() +
                                                   (60 * 35 * 1000)),
                                          Locale.ENGLISH));
+        assertEquals("in 3 hours",
+                impl.formatDistance(new Date(new Date().getTime() +
+                                             ((3* SECONDS_HOUR + 60*20) * 1000)),
+                                    Locale.ENGLISH));
         assertEquals("a day ago",
                      impl.formatDistance(new Date(new Date().getTime() -
                                                   (SECONDS_DAY * 1000)),
