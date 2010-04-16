@@ -21,8 +21,8 @@ import net.sf.jfuzzydate.FuzzyDateFormatter;
 
 ---
 FuzzyDateFormatter format = FuzzyDateFormat.getInstance();
-String someDaysAgo = format.format(dateInThePast);
-String inSomeDays  = format.format(dateInTheFuture);
+String someDaysAgo = format.formatDuration(dateInThePast);
+String inSomeDays  = format.formatDuration(dateInTheFuture);
 ---
  
 * Formatting Durations - e.g. <an hour> 
