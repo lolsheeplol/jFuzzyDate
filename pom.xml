@@ -2,7 +2,7 @@
   <modelVersion>4.0.0</modelVersion>
   <groupId>net.sf.jfuzzydate</groupId>
   <artifactId>jfuzzydate</artifactId>
-  <version>0.1.0</version>
+  <version>0.1.2</version>
   <name>jFuzzyDate</name>
   <description>Converts date, time and durations to more human readable string.	</description>
   <url>https://sourceforge.net/projects/jfuzzydate/</url>
@@ -16,7 +16,28 @@
   		<name>Alexander Maasch</name>
   	</developer>
   </developers>
-   <properties>
+  <reporting>
+  	<plugins>
+  		<plugin>
+  			<groupId>org.apache.maven.plugins</groupId>
+  			<artifactId>maven-javadoc-plugin</artifactId>
+  			<version>2.6.1</version>
+  			 <reportSets>
+          		<reportSet>
+					<id>html</id>
+					<configuration>
+						<doctitle>${project.name} ${project.version} API</doctitle>
+              			<windowtitle>${project.name} ${project.version} API</windowtitle>
+					</configuration>
+					<reports>
+						<report>javadoc</report>
+					</reports>
+				</reportSet>
+			</reportSets>
+  		</plugin>
+  	</plugins>
+  </reporting>
+  <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
   </properties>
   <scm>
