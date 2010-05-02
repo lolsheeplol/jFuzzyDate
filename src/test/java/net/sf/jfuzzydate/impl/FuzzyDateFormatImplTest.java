@@ -46,6 +46,17 @@ public class FuzzyDateFormatImplTest {
 	 */
 	@Test
 	public void testFormatDistanceDate() {
+		FuzzyDateFormatterImpl impl = new FuzzyDateFormatterImpl(
+				DefaultFuzzingConfiguration.getInstance());
+		Date aMinuteAgo = new Date(new Date().getTime() - (30 * 1000));
+		Date in35Minutes = new Date(new Date().getTime() + (60 * 35 * 1000));
+
+		// executing formatDistance(Date) should use system default locale
+		// so we simply compare
+		assertEquals(impl.formatDistance(aMinuteAgo), impl.formatDistance(
+				aMinuteAgo, Locale.getDefault()));
+		assertEquals(impl.formatDistance(in35Minutes), impl.formatDistance(
+				in35Minutes, Locale.getDefault()));
 	}
 
 	/**

@@ -1,98 +1,95 @@
 package net.sf.jfuzzydate.impl;
 
 /**
+ * A date/time range mapping time values up to an upper bound to an externalized
+ * string.
  * 
- *
- * @author ma³
+ * @author amaasch
  */
 public class Range {
-    //~ Static fields/initializers ---------------------------------------------
 
-    /**
+	/**
      * 
      */
-    public static final Range ETERNAL = new Range(Long.MAX_VALUE,
-                                                  "distance.eternal");
+	public static final Range ETERNAL = new Range(Long.MAX_VALUE,
+			"distance.eternal");
 
-    //~ Instance fields --------------------------------------------------------
-
-    /**
+	/**
      * 
      */
-    private Long parameterDivisor;
+	private Long parameterDivisor;
 
-    /**
+	/**
+	 * The key for the externalized string.
+	 */
+	private final String bundleKey;
+
+	/**
      * 
      */
-    private final String bundleKey;
+	private final long upperBound;
 
-    /**
-     * 
-     */
-    private final long upperBound;
+	/**
+	 * Creates a new Range object with an upper binding and a reference to an
+	 * externalized string.
+	 * 
+	 * @param upperBound
+	 * @param bundleKey
+	 */
+	public Range(final long upperBound, final String bundleKey) {
+		this.upperBound = upperBound * 1000;
+		this.bundleKey = bundleKey;
+	}
 
-    //~ Constructors -----------------------------------------------------------
+	/**
+	 * Creates a new Range object with an upper binding and a reference to an
+	 * externalized string. This constructor method also sets a divisor, used to
+	 * define the calculation of number values included in fuzzy strings.
+	 * 
+	 * @param upperBound
+	 * @param bundleKey
+	 * @param parameterDivisor
+	 */
+	public Range(final long upperBound, final String bundleKey,
+			final long parameterDivisor) {
+		this.upperBound = upperBound * 1000;
+		this.bundleKey = bundleKey;
+		this.parameterDivisor = parameterDivisor * 1000;
+	}
 
-/**
-     * Creates a new Intervall object.
-     *
-     * @param upperBound 
-     * @param bundleKey 
-     */
-    public Range(final long upperBound, final String bundleKey) {
-        this.upperBound = upperBound * 1000;
-        this.bundleKey = bundleKey;
-    }
+	/**
+	 * 
+	 * 
+	 * @return the bundleKey
+	 */
+	public String getBundleKey() {
+		return bundleKey;
+	}
 
-/**
-         * Creates a new Intervall object.
-         *
-         * @param upperBound 
-         * @param bundleKey 
-         * @param parameterDivisor 
-         */
-    public Range(final long upperBound, final String bundleKey,
-                 final long parameterDivisor) {
-        this.upperBound = upperBound * 1000;
-        this.bundleKey = bundleKey;
-        this.parameterDivisor = parameterDivisor * 1000;
-    }
+	/**
+	 * 
+	 * 
+	 * @return the parameterDivisor
+	 */
+	public long getParameterDivisor() {
+		return parameterDivisor;
+	}
 
-    //~ Methods ----------------------------------------------------------------
+	/**
+	 * 
+	 * 
+	 * @return the upperBound
+	 */
+	public long getUpperBound() {
+		return upperBound;
+	}
 
-    /**
-     * 
-     *
-     * @return the bundleKey
-     */
-    public String getBundleKey() {
-        return bundleKey;
-    }
-
-    /**
-     * 
-     *
-     * @return the parameterDivisor
-     */
-    public long getParameterDivisor() {
-        return parameterDivisor;
-    }
-
-    /**
-     * 
-     *
-     * @return the upperBound
-     */
-    public long getUpperBound() {
-        return upperBound;
-    }
-
-    /**
-     * 
-     *
-     * @return
-     */
-    public boolean hasDivisor() {
-        return parameterDivisor != null;
-    }
+	/**
+	 * 
+	 * 
+	 * @return
+	 */
+	public boolean hasDivisor() {
+		return parameterDivisor != null;
+	}
 }

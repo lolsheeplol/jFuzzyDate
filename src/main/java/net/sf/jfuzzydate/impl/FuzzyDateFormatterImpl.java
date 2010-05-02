@@ -76,7 +76,7 @@ public class FuzzyDateFormatterImpl implements FuzzyDateFormatter {
 	 * @see net.sf.jfuzzydate.FuzzyDateFormatter#formatDistance(java.util.Date)
 	 */
 	public String formatDistance(final Date date) {
-		return format(date, Locale.getDefault());
+		return formatDistance(date, Locale.getDefault());
 	}
 
 	/*
