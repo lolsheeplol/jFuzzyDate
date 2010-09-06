@@ -4,7 +4,7 @@ jFuzzyDate
  jFuzzyDate is a lightweight java library for formatting easily readable time
  distances and dates.
  
- It is easy to use, fully internationalizable and designed to extensible.
+ It is easy to use, fully internationalizable and designed to be extensible.
  
  Please note: This library is currently in an early alpha state and may change without further notice. 
  
