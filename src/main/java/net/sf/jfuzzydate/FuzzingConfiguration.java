@@ -1,19 +1,18 @@
 package net.sf.jfuzzydate;
 
-import net.sf.jfuzzydate.impl.Range;
-
-import java.util.Locale;
+import net.sf.jfuzzydate.i18n.FuzzyStrings;
 
 
 /**
  * An object that represents a configuration for date and duration fuzzing.
  * 
- * <p>A fuzzing configuration is a set of ranges which are mapped to 
- * internationalized strings. Each of these ranges represents a special human 
+ * <p>
+ * A fuzzing configuration is a set of ranges which are mapped to
+ * internationalized strings. Each of these ranges represents a special human
  * understanding of a distance of time or duration.
- *
- * @author ma³
-  */
+ * 
+ * @author amaasch
+ */
 public interface FuzzingConfiguration {
     //~ Methods ----------------------------------------------------------------
 
@@ -30,31 +29,20 @@ public interface FuzzingConfiguration {
     Range[] getDistanceRanges(FuzzingStrength strenght);
 
     /**
-     * DOCUMENT ME!
+     * This method returns an array of range objects. These are used to
+     * map ranges of durations to internationalized readable strings.
      *
-     * @param strenght DOCUMENT ME!
+     * @param strenght the fuzzing strength defining the granularity of ranges
+     *        to return.
      *
-     * @return DOCUMENT ME!
+     * @return an array of ranges for durations.
      */
     Range[] getDurationRanges(FuzzingStrength strenght);
 
     /**
-     * DOCUMENT ME!
+     * Returns the configured fuzzy string builder instance.
      *
-     * @param range
-     * @param locale
-     *
-     * @return
+     * @return a FuzzyStrings object.
      */
-    String getFuzzyString(Range range, Locale locale, Object... params);
-
-    /**
-     * DOCUMENT ME!
-     *
-     * @param pattern
-     * @param locale
-     *
-     * @return
-     */
-    String getFuzzyString(String pattern, Locale locale, Object... params);
+    FuzzyStrings getStringBuilder();
 }

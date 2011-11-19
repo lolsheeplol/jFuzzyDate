@@ -2,6 +2,8 @@ package net.sf.jfuzzydate.impl;
 
 import net.sf.jfuzzydate.FuzzingConfiguration;
 import net.sf.jfuzzydate.FuzzingStrength;
+import net.sf.jfuzzydate.Range;
+import net.sf.jfuzzydate.Unit;
 import net.sf.jfuzzydate.i18n.FuzzyStrings;
 
 import java.util.Locale;
@@ -10,7 +12,7 @@ import java.util.Locale;
 /**
  * A very simple and static configuration for fuzzy date formatting.
  *
- * @author ma³
+ * @author amaasch
  */
 public final class DefaultFuzzingConfiguration implements FuzzingConfiguration {
     //~ Static fields/initializers ---------------------------------------------
@@ -32,17 +34,17 @@ public final class DefaultFuzzingConfiguration implements FuzzingConfiguration {
     //~ Instance fields --------------------------------------------------------
 
     /**
-     * 
+     * Normal distance configuration.
      */
     private final Range[] dist_normal;
 
     /**
-     * 
+     * Normal duration configuration.
      */
     private final Range[] dur_normal;
 
     /**
-     * 
+     * The provider of the fuzzy strings.
      */
     private FuzzyStrings fuzzyStrings = new FuzzyStrings(FUZZY_STRING_BUNDLE);
 
@@ -56,44 +58,45 @@ public final class DefaultFuzzingConfiguration implements FuzzingConfiguration {
         final int hour = 60 * min;
         final int day = 24 * hour;
         final int week = 7 * day;
-        final int month = 30 * day;
 
         dur_normal = new Range[] {
-                         new Range(80, "duration.minute.1"),
-                         new Range(140, "duration.minute.2"),
-                         new Range(40 * min, "duration.minute.x", min),
-                         new Range(90 * min, "duration.hour.1"),
-                         new Range(150 * min, "duration.hour.2"),
-                         new Range(day, "duration.hour.x", hour),
-                         new Range(36 * hour, "duration.day.1"),
-                         new Range(60 * hour, "duration.day.2"),
-                         new Range(week, "duration.day.x", day),
-                         new Range(11 * day, "duration.week.1"),
-                         new Range(18 * day, "duration.week.2"),
-                         new Range(4 * week, "duration.week.x", week),
-                         new Range(45 * day, "duration.month.1"),
-                         new Range(75 * day, "duration.month.2"),
-                         new Range(300 * day, "duration.month.x", month),
-                         new Range(Long.MAX_VALUE, "duration.eternal")
+                         new StaticRange(80, "duration.minute.1"),
+                         new StaticRange(140, "duration.minute.2"),
+                         new GenericRange(40 * min, "duration.numbered", Unit.MINUTE),
+                         new StaticRange(90 * min, "duration.hour.1"),
+                         new StaticRange(150 * min, "duration.hour.2"),
+                         new GenericRange(day, "duration.numbered", Unit.HOUR),
+                         new StaticRange(36 * hour, "duration.day.1"),
+                         new StaticRange(60 * hour, "duration.day.2"),
+                         new GenericRange(week, "duration.numbered", Unit.DAY),
+                         new StaticRange(11 * day, "duration.week.1"),
+                         new StaticRange(18 * day, "duration.week.2"),
+                         new GenericRange(4 * week, "duration.numbered", Unit.WEEKS),
+                         new StaticRange(45 * day, "duration.month.1"),
+                         new StaticRange(75 * day, "duration.month.2"),
+                         new GenericRange(300 * day, "duration.numbered",
+                                          Unit.MONTHS),
+                         new Eternity("duration.eternal")
                      };
 
         dist_normal = new Range[] {
-                          new Range(80, "distance.minute.1"),
-                          new Range(140, "distance.minute.2"),
-                          new Range(40 * min, "distance.minute.x", min),
-                          new Range(90 * min, "distance.hour.1"),
-                          new Range(150 * min, "distance.hour.2"),
-                          new Range(day, "distance.hour.x", hour),
-                          new Range(36 * hour, "distance.day.1"),
-                          new Range(60 * hour, "distance.day.2"),
-                          new Range(week, "distance.day.x", day),
-                          new Range(11 * day, "distance.week.1"),
-                          new Range(18 * day, "distance.week.2"),
-                          new Range(4 * week, "distance.week.x", week),
-                          new Range(45 * day, "distance.month.1"),
-                          new Range(75 * day, "distance.month.2"),
-                          new Range(300 * day, "distance.month.x", month),
-                          new Range(Long.MAX_VALUE, "duration.eternal")
+                          new StaticRange(80, "distance.minute.1"),
+                          new StaticRange(140, "distance.minute.2"),
+                          new GenericRange(40 * min, "distance.numbered", Unit.MINUTE),
+                          new StaticRange(90 * min, "distance.hour.1"),
+                          new StaticRange(150 * min, "distance.hour.2"),
+                          new GenericRange(day, "distance.numbered", Unit.HOUR),
+                          new StaticRange(36 * hour, "distance.day.1"),
+                          new StaticRange(60 * hour, "distance.day.2"),
+                          new GenericRange(week, "distance.numbered", Unit.DAY),
+                          new StaticRange(11 * day, "distance.week.1"),
+                          new StaticRange(18 * day, "distance.week.2"),
+                          new GenericRange(4 * week, "distance.numbered", Unit.WEEKS),
+                          new StaticRange(45 * day, "distance.month.1"),
+                          new StaticRange(75 * day, "distance.month.2"),
+                          new GenericRange(300 * day, "distance.numbered",
+                                           Unit.MONTHS),
+                          new Eternity("distance.eternal")
                       };
     }
 
@@ -103,7 +106,7 @@ public final class DefaultFuzzingConfiguration implements FuzzingConfiguration {
      * This static method returns a shared instance of this default
      * configuration class.
      *
-     * @return a DefaultFuzzingConfiguration istance.
+     * @return a DefaultFuzzingConfiguration instance.
      */
     public static DefaultFuzzingConfiguration getInstance() {
         if (instance == null) {
@@ -113,8 +116,12 @@ public final class DefaultFuzzingConfiguration implements FuzzingConfiguration {
         return instance;
     }
 
-    /* (non-Javadoc)
-     * @see net.sf.jfuzzydate.FuzzingConfiguration#getDistanceRanges(net.sf.jfuzzydate.FuzzingStrength)
+    /*
+     * (non-Javadoc)
+     *
+     * @see
+     * net.sf.jfuzzydate.FuzzingConfiguration#getDistanceRanges(net.sf.jfuzzydate
+     * .FuzzingStrength)
      */
     public Range[] getDistanceRanges(FuzzingStrength strenght) {
         final Range[] ranges;
@@ -126,13 +133,13 @@ public final class DefaultFuzzingConfiguration implements FuzzingConfiguration {
                 break;
 
             case STRONG :
-                //TODO
+                // TODO
                 ranges = dist_normal;
 
                 break;
 
             case EXTREME :
-                //TODO
+                // TODO
                 ranges = dist_normal;
 
                 break;
@@ -144,8 +151,12 @@ public final class DefaultFuzzingConfiguration implements FuzzingConfiguration {
         return ranges;
     }
 
-    /* (non-Javadoc)
-     * @see net.sf.jfuzzydate.FuzzingConfiguration#getDurationRanges(net.sf.jfuzzydate.FuzzingStrength)
+    /*
+     * (non-Javadoc)
+     *
+     * @see
+     * net.sf.jfuzzydate.FuzzingConfiguration#getDurationRanges(net.sf.jfuzzydate
+     * .FuzzingStrength)
      */
     public Range[] getDurationRanges(FuzzingStrength strenght) {
         final Range[] ranges;
@@ -157,13 +168,13 @@ public final class DefaultFuzzingConfiguration implements FuzzingConfiguration {
                 break;
 
             case STRONG :
-                //TODO
+                // TODO
                 ranges = dur_normal;
 
                 break;
 
             case EXTREME :
-                //TODO
+                // TODO
                 ranges = dur_normal;
 
                 break;
@@ -176,16 +187,9 @@ public final class DefaultFuzzingConfiguration implements FuzzingConfiguration {
     }
 
     /* (non-Javadoc)
-     * @see net.sf.jfuzzydate.FuzzingConfiguration#getFuzzyString(net.sf.jfuzzydate.impl.Range, java.util.Locale, java.lang.Object[])
+     * @see net.sf.jfuzzydate.FuzzingConfiguration#getStringBuilder()
      */
-    public String getFuzzyString(Range range, Locale locale, Object... params) {
-        return fuzzyStrings.getString(range.getBundleKey(), locale, params);
-    }
-
-    /* (non-Javadoc)
-     * @see net.sf.jfuzzydate.FuzzingConfiguration#getFuzzyString(java.lang.String, java.util.Locale, java.lang.Object[])
-     */
-    public String getFuzzyString(String pattern, Locale locale, Object... params) {
-        return fuzzyStrings.getString(pattern, locale, params);
+    public FuzzyStrings getStringBuilder() {
+        return this.fuzzyStrings;
     }
 }
