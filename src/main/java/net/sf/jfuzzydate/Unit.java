@@ -18,7 +18,7 @@ public enum Unit {SECOND(1), MINUTE(60), HOUR(60 * MINUTE.numberOfSeconds),
      *
      * @param seconds DOCUMENT ME!
      */
-    private Unit(long seconds) {
+    private Unit(final long seconds) {
         this.numberOfSeconds = seconds;
     }
 

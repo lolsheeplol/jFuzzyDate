@@ -37,7 +37,7 @@ public class I18nStringLookupRuleSelector implements PluralRuleSelector {
      *        locale specific plural rule.
      * @param key the key which references the plural rule.
      */
-    public I18nStringLookupRuleSelector(FuzzyStrings stringBuilder, String key) {
+    public I18nStringLookupRuleSelector(final FuzzyStrings stringBuilder, final String key) {
         this.fuzzyStringBuilder = stringBuilder;
         this.ruleKey = key;
     }
@@ -50,7 +50,7 @@ public class I18nStringLookupRuleSelector implements PluralRuleSelector {
      * @see
      * net.sf.jfuzzydate.i18n.PluralRuleSelector#selectRuleFor(java.util.Locale)
      */
-    public PluralRule selectRuleFor(Locale locale) {
+    public PluralRule selectRuleFor(final Locale locale) {
         final String rule = fuzzyStringBuilder.getString(ruleKey, locale);
 
         return PluralRule.valueOf(rule);

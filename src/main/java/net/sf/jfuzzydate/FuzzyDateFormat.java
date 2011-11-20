@@ -11,13 +11,20 @@ import net.sf.jfuzzydate.impl.FuzzyDateFormatterImpl;
  * @author amaasch
  */
 public final class FuzzyDateFormat {
+	
+	/**
+	 * No instances available.
+	 */
+	private FuzzyDateFormat() {
+	}
+	
 	/**
 	 * Creates a fuzzy date formatter instance with the static default
 	 * configuration.
 	 * 
 	 * @return a fuzzy date formatter instance.
 	 */
-	public static final FuzzyDateFormatter getInstance() {
+	public static FuzzyDateFormatter getInstance() {
 		return new FuzzyDateFormatterImpl(DefaultFuzzingConfiguration
 				.getInstance());
 	}
@@ -30,7 +37,7 @@ public final class FuzzyDateFormat {
 	 * 
 	 * @return a fuzzy date formatter instance.
 	 */
-	public static final FuzzyDateFormatter getInstance(
+	public static FuzzyDateFormatter getInstance(
 			final FuzzingConfiguration config) {
 		return new FuzzyDateFormatterImpl(config);
 	}

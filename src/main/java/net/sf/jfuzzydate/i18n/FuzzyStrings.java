@@ -110,10 +110,10 @@ public class FuzzyStrings {
      * @return the string for the given key.
      */
     public String getString(final String key, final Locale locale) {
-        final ResourceBundle rb = ResourceBundle.getBundle(bundleBaseName,
+        final ResourceBundle bundle = ResourceBundle.getBundle(bundleBaseName,
                                                            locale);
 
-        return rb.getString(key);
+        return bundle.getString(key);
     }
 
     /**

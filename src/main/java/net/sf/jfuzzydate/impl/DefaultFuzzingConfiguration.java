@@ -20,7 +20,7 @@ public final class DefaultFuzzingConfiguration implements FuzzingConfiguration {
     /**
      * The singleton instance.
      */
-    private static DefaultFuzzingConfiguration instance;
+    private static final DefaultFuzzingConfiguration INSTANCE = new DefaultFuzzingConfiguration();
 
     /**
      * The internationalization resource bundle name for looking up the
@@ -46,7 +46,7 @@ public final class DefaultFuzzingConfiguration implements FuzzingConfiguration {
     /**
      * The provider of the fuzzy strings.
      */
-    private FuzzyStrings fuzzyStrings = new FuzzyStrings(FUZZY_STRING_BUNDLE);
+    private final FuzzyStrings fuzzyStrings = new FuzzyStrings(FUZZY_STRING_BUNDLE);
 
     //~ Constructors -----------------------------------------------------------
 
@@ -109,11 +109,7 @@ public final class DefaultFuzzingConfiguration implements FuzzingConfiguration {
      * @return a DefaultFuzzingConfiguration instance.
      */
     public static DefaultFuzzingConfiguration getInstance() {
-        if (instance == null) {
-            instance = new DefaultFuzzingConfiguration();
-        }
-
-        return instance;
+    	return INSTANCE;
     }
 
     /*
@@ -123,7 +119,7 @@ public final class DefaultFuzzingConfiguration implements FuzzingConfiguration {
      * net.sf.jfuzzydate.FuzzingConfiguration#getDistanceRanges(net.sf.jfuzzydate
      * .FuzzingStrength)
      */
-    public Range[] getDistanceRanges(FuzzingStrength strenght) {
+    public Range[] getDistanceRanges(final FuzzingStrength strenght) {
         final Range[] ranges;
 
         switch (strenght) {
@@ -158,7 +154,7 @@ public final class DefaultFuzzingConfiguration implements FuzzingConfiguration {
      * net.sf.jfuzzydate.FuzzingConfiguration#getDurationRanges(net.sf.jfuzzydate
      * .FuzzingStrength)
      */
-    public Range[] getDurationRanges(FuzzingStrength strenght) {
+    public Range[] getDurationRanges(final FuzzingStrength strenght) {
         final Range[] ranges;
 
         switch (strenght) {
