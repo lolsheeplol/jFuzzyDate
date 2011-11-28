@@ -6,8 +6,6 @@ import net.sf.jfuzzydate.Range;
 import net.sf.jfuzzydate.Unit;
 import net.sf.jfuzzydate.i18n.FuzzyStrings;
 
-import java.util.Locale;
-
 
 /**
  * A very simple and static configuration for fuzzy date formatting.
