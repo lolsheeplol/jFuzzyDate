@@ -58,7 +58,7 @@ public class FuzzyDateFormatImplTest {
 			assertEquals(impl.formatDistance(in35Minutes), impl.formatDistance(
 				in35Minutes, Locale.getDefault()));
 		} catch (MissingResourceException e) {
-			System.out.println("Warning: Resource for default locale not available for testing.");
+			//System.out.println("Warning: Resource for default locale not available for testing.");
 		}
 	}
 
@@ -72,39 +72,33 @@ public class FuzzyDateFormatImplTest {
 		FuzzyDateFormatterImpl impl = new FuzzyDateFormatterImpl(
 				DefaultFuzzingConfiguration.getInstance());
 
-		assertEquals("a minute ago", impl.formatDistance(new Date(new Date()
-				.getTime()
+		final long now = new Date().getTime();
+		
+		assertEquals("a minute ago", impl.formatDistance(new Date(now
 				- (30 * 1000)), Locale.ENGLISH));
-		assertEquals("in a minute", impl.formatDistance(new Date(new Date()
-				.getTime()
+		assertEquals("in a minute", impl.formatDistance(new Date(now
 				+ (30 * 1000)), Locale.ENGLISH));
-		assertEquals("two minutes ago", impl.formatDistance(new Date(new Date()
-				.getTime()
+		assertEquals("two minutes ago", impl.formatDistance(new Date(now
 				- (60 * 2 * 1000)), Locale.ENGLISH));
-		assertEquals("in two minutes", impl.formatDistance(new Date(new Date()
-				.getTime()
+		assertEquals("in two minutes", impl.formatDistance(new Date(now
 				+ (60 * 2 * 1000)), Locale.ENGLISH));
-		assertEquals("in 35 minutes", impl.formatDistance(new Date(new Date()
-				.getTime()
+		assertEquals("in 35 minutes", impl.formatDistance(new Date(now
 				+ (60 * 35 * 1000)), Locale.ENGLISH));
-		assertEquals("in 3 hours", impl.formatDistance(new Date(new Date()
-				.getTime()
+		assertEquals("in 3 hours", impl.formatDistance(new Date(now
 				+ (((3 * SECONDS_HOUR) + (60 * 20)) * 1000)), Locale.ENGLISH));
-		assertEquals("a day ago", impl.formatDistance(new Date(new Date()
-				.getTime()
+		assertEquals("a day ago", impl.formatDistance(new Date(now
 				- (SECONDS_DAY * 1000)), Locale.ENGLISH));
-		assertEquals("in 5 days", impl.formatDistance(new Date(new Date()
-				.getTime()
+		assertEquals("in 5 days", impl.formatDistance(new Date(now
 				+ (SECONDS_DAY * 5 * 1000)), Locale.ENGLISH));
-		assertEquals("a week ago", impl.formatDistance(new Date(new Date()
-				.getTime()
+		assertEquals("a week ago", impl.formatDistance(new Date(now
 				- (SECONDS_DAY * 7 * 1000)), Locale.ENGLISH));
-		assertEquals("vor einer Woche", impl.formatDistance(new Date(new Date()
-				.getTime()
+		
+		assertEquals("vor einer Woche", impl.formatDistance(new Date(now
 				- (SECONDS_DAY * 7 * 1000)), Locale.GERMAN));
-		assertEquals("vor zwei Wochen", impl.formatDistance(new Date(new Date()
-				.getTime()
+		assertEquals("vor zwei Wochen", impl.formatDistance(new Date(now
 				- (SECONDS_DAY * 14 * 1000)), Locale.GERMAN));
+		assertEquals("in 3 Wochen", impl.formatDistance(new Date(now
+				+ (SECONDS_DAY * 21 * 1000)), Locale.GERMAN));
 	}
 
 	/**

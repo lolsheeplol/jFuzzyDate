@@ -200,18 +200,20 @@ public class FuzzyDateFormatterImpl implements FuzzyDateFormatter {
 
         if (range instanceof GenericRange) {
             final GenericRange genericRange = (GenericRange) range;
-            final int parameter = Math.round(milliSeconds / genericRange.getUnit()
+            final float readableDistance = milliSeconds / (float)(genericRange.getUnit()
                                                                         .getSeconds() * 1000);
+			final int parameter = Math.round(readableDistance);
 
-            return fuzzyStrings.getString(tensePattern, locale,
-                                          fuzzyStrings.getString(range.getI18nKey(),
-                                                                 locale,
-                                                                 new Object[] {
-                                                                     String.valueOf(parameter),
-                                                                     fuzzyStrings.getPlural(parameter,
-                                                                                            genericRange.getUnit(),
-                                                                                            locale)
-                                                                 }));
+            final String pluralizedUnit = fuzzyStrings.getPlural(parameter,
+										                        genericRange.getUnit(),
+										                        locale);
+			final String distanceString = fuzzyStrings.getString(range.getI18nKey(),
+										                         locale,
+										                         new Object[] {
+										                             String.valueOf(parameter),
+										                             pluralizedUnit
+										                         });
+			return fuzzyStrings.getString(tensePattern, locale,  distanceString);
         }
 
         return fuzzyStrings.getString(tensePattern, locale,
@@ -260,8 +262,8 @@ public class FuzzyDateFormatterImpl implements FuzzyDateFormatter {
 
         if (range instanceof GenericRange) {
             final GenericRange genericRange = (GenericRange) range;
-            final int parameter = Math.round(milliSeconds / genericRange.getUnit()
-                                                                        .getSeconds() * 1000);
+            final int parameter = Math.round(milliSeconds / (float)(genericRange.getUnit()
+                                                                        .getSeconds() * 1000));
 
             return fuzzyStrings.getString(range.getI18nKey(), locale,
                                           new Object[] {

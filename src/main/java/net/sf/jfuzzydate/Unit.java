@@ -6,8 +6,8 @@ package net.sf.jfuzzydate;
  * @author amaasch
  */
 public enum Unit {SECOND(1), MINUTE(60), HOUR(60 * MINUTE.numberOfSeconds), 
-    DAY(24 * HOUR.numberOfSeconds), WEEKS(7 * DAY.numberOfSeconds), 
-    MONTHS(30 * DAY.numberOfSeconds), YEARS(31556952), CENTURY(100 * 31556952);
+    DAY(24 * HOUR.numberOfSeconds), WEEK(7 * DAY.numberOfSeconds), 
+    MONTH(30 * DAY.numberOfSeconds), YEAR(31556952), CENTURY(100 * 31556952);
     /**
      * DOCUMENT ME!
      */

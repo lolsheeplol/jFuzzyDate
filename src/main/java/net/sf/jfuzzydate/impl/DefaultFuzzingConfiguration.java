@@ -69,11 +69,11 @@ public final class DefaultFuzzingConfiguration implements FuzzingConfiguration {
                          new GenericRange(week, "duration.numbered", Unit.DAY),
                          new StaticRange(11 * day, "duration.week.1"),
                          new StaticRange(18 * day, "duration.week.2"),
-                         new GenericRange(4 * week, "duration.numbered", Unit.WEEKS),
+                         new GenericRange(4 * week, "duration.numbered", Unit.WEEK),
                          new StaticRange(45 * day, "duration.month.1"),
                          new StaticRange(75 * day, "duration.month.2"),
                          new GenericRange(300 * day, "duration.numbered",
-                                          Unit.MONTHS),
+                                          Unit.MONTH),
                          new Eternity("duration.eternal")
                      };
 
@@ -89,11 +89,11 @@ public final class DefaultFuzzingConfiguration implements FuzzingConfiguration {
                           new GenericRange(week, "distance.numbered", Unit.DAY),
                           new StaticRange(11 * day, "distance.week.1"),
                           new StaticRange(18 * day, "distance.week.2"),
-                          new GenericRange(4 * week, "distance.numbered", Unit.WEEKS),
+                          new GenericRange(4 * week, "distance.numbered", Unit.WEEK),
                           new StaticRange(45 * day, "distance.month.1"),
                           new StaticRange(75 * day, "distance.month.2"),
                           new GenericRange(300 * day, "distance.numbered",
-                                           Unit.MONTHS),
+                                           Unit.MONTH),
                           new Eternity("distance.eternal")
                       };
     }
