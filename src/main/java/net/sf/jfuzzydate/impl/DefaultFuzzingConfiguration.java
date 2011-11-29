@@ -2,9 +2,10 @@ package net.sf.jfuzzydate.impl;
 
 import net.sf.jfuzzydate.FuzzingConfiguration;
 import net.sf.jfuzzydate.FuzzingStrength;
+import net.sf.jfuzzydate.FuzzyStringProvider;
 import net.sf.jfuzzydate.Range;
 import net.sf.jfuzzydate.Unit;
-import net.sf.jfuzzydate.i18n.FuzzyStrings;
+import net.sf.jfuzzydate.i18n.ResourceBundleFSProvider;
 
 
 /**
@@ -13,7 +14,7 @@ import net.sf.jfuzzydate.i18n.FuzzyStrings;
  * @author amaasch
  */
 public final class DefaultFuzzingConfiguration implements FuzzingConfiguration {
-    //~ Static fields/initializers ---------------------------------------------
+    //~ Static fields/initializers ---------------------------------------------------------------------------
 
     /**
      * The singleton instance.
@@ -21,15 +22,20 @@ public final class DefaultFuzzingConfiguration implements FuzzingConfiguration {
     private static final DefaultFuzzingConfiguration INSTANCE = new DefaultFuzzingConfiguration();
 
     /**
-     * The internationalization resource bundle name for looking up the
-     * strings of this configuration.
+     * The internationalization resource bundle name for looking up the strings of this
+     * configuration.
      *
      * @see #getFuzzyString(Range, Locale, Object...)
      * @see #getFuzzyString(String, Locale, Object...)
      */
     private static final String FUZZY_STRING_BUNDLE = "net.sf.jfuzzydate.i18n.jFuzzyDate";
 
-    //~ Instance fields --------------------------------------------------------
+    //~ Instance fields --------------------------------------------------------------------------------------
+
+    /**
+     * The provider of the fuzzy strings.
+     */
+    private final FuzzyStringProvider fuzzyStrings = new ResourceBundleFSProvider(FUZZY_STRING_BUNDLE);
 
     /**
      * Normal distance configuration.
@@ -41,12 +47,7 @@ public final class DefaultFuzzingConfiguration implements FuzzingConfiguration {
      */
     private final Range[] dur_normal;
 
-    /**
-     * The provider of the fuzzy strings.
-     */
-    private final FuzzyStrings fuzzyStrings = new FuzzyStrings(FUZZY_STRING_BUNDLE);
-
-    //~ Constructors -----------------------------------------------------------
+    //~ Constructors -----------------------------------------------------------------------------------------
 
 /**
      * Creates a new DefaultFuzzingConfiguration object.
@@ -58,8 +59,7 @@ public final class DefaultFuzzingConfiguration implements FuzzingConfiguration {
         final int week = 7 * day;
 
         dur_normal = new Range[] {
-                         new StaticRange(80, "duration.minute.1"),
-                         new StaticRange(140, "duration.minute.2"),
+                         new StaticRange(80, "duration.minute.1"), new StaticRange(140, "duration.minute.2"),
                          new GenericRange(40 * min, "duration.numbered", Unit.MINUTE),
                          new StaticRange(90 * min, "duration.hour.1"),
                          new StaticRange(150 * min, "duration.hour.2"),
@@ -72,14 +72,12 @@ public final class DefaultFuzzingConfiguration implements FuzzingConfiguration {
                          new GenericRange(4 * week, "duration.numbered", Unit.WEEK),
                          new StaticRange(45 * day, "duration.month.1"),
                          new StaticRange(75 * day, "duration.month.2"),
-                         new GenericRange(300 * day, "duration.numbered",
-                                          Unit.MONTH),
+                         new GenericRange(300 * day, "duration.numbered", Unit.MONTH),
                          new Eternity("duration.eternal")
                      };
 
         dist_normal = new Range[] {
-                          new StaticRange(80, "distance.minute.1"),
-                          new StaticRange(140, "distance.minute.2"),
+                          new StaticRange(80, "distance.minute.1"), new StaticRange(140, "distance.minute.2"),
                           new GenericRange(40 * min, "distance.numbered", Unit.MINUTE),
                           new StaticRange(90 * min, "distance.hour.1"),
                           new StaticRange(150 * min, "distance.hour.2"),
@@ -92,22 +90,20 @@ public final class DefaultFuzzingConfiguration implements FuzzingConfiguration {
                           new GenericRange(4 * week, "distance.numbered", Unit.WEEK),
                           new StaticRange(45 * day, "distance.month.1"),
                           new StaticRange(75 * day, "distance.month.2"),
-                          new GenericRange(300 * day, "distance.numbered",
-                                           Unit.MONTH),
+                          new GenericRange(300 * day, "distance.numbered", Unit.MONTH),
                           new Eternity("distance.eternal")
                       };
     }
 
-    //~ Methods ----------------------------------------------------------------
+    //~ Methods ----------------------------------------------------------------------------------------------
 
     /**
-     * This static method returns a shared instance of this default
-     * configuration class.
+     * This static method returns a shared instance of this default configuration class.
      *
      * @return a DefaultFuzzingConfiguration instance.
      */
     public static DefaultFuzzingConfiguration getInstance() {
-    	return INSTANCE;
+        return INSTANCE;
     }
 
     /*
@@ -121,24 +117,24 @@ public final class DefaultFuzzingConfiguration implements FuzzingConfiguration {
         final Range[] ranges;
 
         switch (strenght) {
-            case NORMAL :
+            case NORMAL:
                 ranges = dist_normal;
 
                 break;
 
-            case STRONG :
+            case STRONG:
                 // TODO
                 ranges = dist_normal;
 
                 break;
 
-            case EXTREME :
+            case EXTREME:
                 // TODO
                 ranges = dist_normal;
 
                 break;
 
-            default :
+            default:
                 ranges = dist_normal;
         }
 
@@ -156,24 +152,24 @@ public final class DefaultFuzzingConfiguration implements FuzzingConfiguration {
         final Range[] ranges;
 
         switch (strenght) {
-            case NORMAL :
+            case NORMAL:
                 ranges = dur_normal;
 
                 break;
 
-            case STRONG :
+            case STRONG:
                 // TODO
                 ranges = dur_normal;
 
                 break;
 
-            case EXTREME :
+            case EXTREME:
                 // TODO
                 ranges = dur_normal;
 
                 break;
 
-            default :
+            default:
                 ranges = dur_normal;
         }
 
@@ -181,9 +177,9 @@ public final class DefaultFuzzingConfiguration implements FuzzingConfiguration {
     }
 
     /* (non-Javadoc)
-     * @see net.sf.jfuzzydate.FuzzingConfiguration#getStringBuilder()
-     */
-    public FuzzyStrings getStringBuilder() {
+         * @see net.sf.jfuzzydate.FuzzingConfiguration#getStringProvider()
+         */
+    public FuzzyStringProvider getStringProvider() {
         return this.fuzzyStrings;
     }
 }
