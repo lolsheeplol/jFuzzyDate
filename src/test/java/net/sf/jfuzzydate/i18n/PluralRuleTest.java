@@ -19,15 +19,16 @@ public class PluralRuleTest {
      */
     @Test
     public void testSelectPluralForm1() {
-        testSelector(ASIAN, 0, 0);
-        testSelector(ASIAN, 0, 1);
-        testSelector(ASIAN, 0, 2);
-        testSelector(ASIAN, 0, 3);
-        testSelector(ASIAN, 0, 4);
-        testSelector(ASIAN, 0, 11);
-        testSelector(ASIAN, 0, 21);
-        testSelector(ASIAN, 0, 102);
-        testSelector(ASIAN, 0, 1003);
+        final PluralRule rule = ASIAN;
+		testSelector(rule, 0, 0);
+        testSelector(rule, 0, 1);
+        testSelector(rule, 0, 2);
+        testSelector(rule, 0, 3);
+        testSelector(rule, 0, 4);
+        testSelector(rule, 0, 11);
+        testSelector(rule, 0, 21);
+        testSelector(rule, 0, 102);
+        testSelector(rule, 0, 1003);
     }
 
     /**
@@ -35,15 +36,16 @@ public class PluralRuleTest {
      */
     @Test
     public void testSelectPluralForm2() {
-        testSelector(TWO_FORMS_1, 1, 0);
-        testSelector(TWO_FORMS_1, 0, 1);
-        testSelector(TWO_FORMS_1, 1, 2);
-        testSelector(TWO_FORMS_1, 1, 3);
-        testSelector(TWO_FORMS_1, 1, 4);
-        testSelector(TWO_FORMS_1, 1, 11);
-        testSelector(TWO_FORMS_1, 1, 21);
-        testSelector(TWO_FORMS_1, 1, 102);
-        testSelector(TWO_FORMS_1, 1, 1003);
+        final PluralRule rule = TWO_FORMS_1;
+		testSelector(rule, 1, 0);
+        testSelector(rule, 0, 1);
+        testSelector(rule, 1, 2);
+        testSelector(rule, 1, 3);
+        testSelector(rule, 1, 4);
+        testSelector(rule, 1, 11);
+        testSelector(rule, 1, 21);
+        testSelector(rule, 1, 102);
+        testSelector(rule, 1, 1003);
     }
 
     /**
@@ -51,17 +53,60 @@ public class PluralRuleTest {
      */
     @Test
     public void testSelectPluralForm3() {
-        testSelector(TWO_FORMS_2, 0, 0);
-        testSelector(TWO_FORMS_2, 0, 1);
-        testSelector(TWO_FORMS_2, 1, 2);
-        testSelector(TWO_FORMS_2, 1, 3);
-        testSelector(TWO_FORMS_2, 1, 4);
-        testSelector(TWO_FORMS_2, 1, 11);
-        testSelector(TWO_FORMS_2, 1, 21);
-        testSelector(TWO_FORMS_2, 1, 102);
-        testSelector(TWO_FORMS_2, 1, 1003);
+        final PluralRule rule = TWO_FORMS_2;
+		testSelector(rule, 0, 0);
+        testSelector(rule, 0, 1);
+        testSelector(rule, 1, 2);
+        testSelector(rule, 1, 3);
+        testSelector(rule, 1, 4);
+        testSelector(rule, 1, 11);
+        testSelector(rule, 1, 21);
+        testSelector(rule, 1, 102);
+        testSelector(rule, 1, 1003);
+    }
+    
+    /**
+     * RULE4 Latvian
+     */
+    @Test
+    public void testSelectPluralForm4() {
+        final PluralRule rule = LATVIAN;
+		testSelector(rule, 0, 0);
+        testSelector(rule, 1, 1);
+        testSelector(rule, 2, 2);
+        testSelector(rule, 2, 3);
+        testSelector(rule, 2, 4);
+        testSelector(rule, 2, 11);
+        testSelector(rule, 1, 21);
+        testSelector(rule, 2, 102);
+        testSelector(rule, 1, 111);
+        testSelector(rule, 2, 1003);
     }
 
+    /**
+     * RULE5 Celtic
+     */
+    @Test
+    public void testSelectPluralForm5() {
+        final PluralRule rule = CELTIC;
+		testSelector(rule, 3, 0);
+        testSelector(rule, 0, 1);
+        testSelector(rule, 1, 2);
+        testSelector(rule, 2, 3);
+        testSelector(rule, 2, 4);
+        testSelector(rule, 2, 10);
+        testSelector(rule, 0, 11);
+        testSelector(rule, 1, 12);
+        testSelector(rule, 2, 13);
+        testSelector(rule, 2, 19);
+        testSelector(rule, 3, 20);
+        testSelector(rule, 3, 21);
+        testSelector(rule, 3, 102);
+        testSelector(rule, 3, 1003);
+    }
+
+
+    
     /**
      * TODO DOCUMENT ME!
      *

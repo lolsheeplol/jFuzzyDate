@@ -98,7 +98,7 @@ public enum PluralRule {
 			if (absNumber == 0) {
 				pluralForm = 0;
 			} else if (endsBetween(absNumber, 1, 1, 1)
-					&& endsBetween(absNumber, 11, 11, 2)) {
+					&& absNumber != 11) {
 				pluralForm = 1;
 			} else {
 				pluralForm = 2;

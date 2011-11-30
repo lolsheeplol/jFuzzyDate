@@ -37,15 +37,15 @@ public class ResourceBundleFSProvider implements FuzzyStringProvider {
     //~ Methods ----------------------------------------------------------------------------------------------
 
     /* (non-Javadoc)
-         * @see net.sf.jfuzzydate.i18n.FuzzyStringProvider#getString(java.lang.String)
-         */
+     * @see net.sf.jfuzzydate.i18n.FuzzyStringProvider#getString(java.lang.String)
+     */
     public String getString(final String key) {
         return getString(key, Locale.getDefault());
     }
 
     /* (non-Javadoc)
-         * @see net.sf.jfuzzydate.i18n.FuzzyStringProvider#getString(java.lang.String, java.util.Locale)
-         */
+     * @see net.sf.jfuzzydate.i18n.FuzzyStringProvider#getString(java.lang.String, java.util.Locale)
+     */
     public String getString(final String key, final Locale locale) {
         final ResourceBundle bundle = ResourceBundle.getBundle(bundleBaseName, locale);
 
@@ -53,17 +53,9 @@ public class ResourceBundleFSProvider implements FuzzyStringProvider {
     }
 
     /* (non-Javadoc)
-         * @see net.sf.jfuzzydate.i18n.FuzzyStringProvider#getString(java.lang.String, java.util.Locale, java.lang.Object)
-         */
+     * @see net.sf.jfuzzydate.i18n.FuzzyStringProvider#getString(java.lang.String, java.util.Locale, java.lang.Object)
+     */
     public String getString(final String key, final Locale locale, final Object... params) {
-        String message = null;
-
-        if (params == null) {
-            message = getString(key);
-        } else {
-            message = MessageFormat.format(getString(key, locale), params);
-        }
-
-        return message;
+        return MessageFormat.format(getString(key, locale), params);
     }
 }
