@@ -42,8 +42,14 @@ public class Pluralizer {
      * Creates a new Pluralizer object.
      *
      * @param stringProvider
+     * 
+     * @throws IllegalArgumentException Thrown, if the given <code>stringProvider</code> is <code>null.</code>
      */
     public Pluralizer(final FuzzyStringProvider stringProvider) {
+        if (stringProvider == null) {
+            throw new IllegalArgumentException("Pluralizer requires a non-null FuzzyStringProvider.");
+        }
+
         this.fuzzyStringProvider = stringProvider;
         ruleSelector = new I18nStringLookupRuleSelector(stringProvider, "plurals.mode");
     }
@@ -51,12 +57,24 @@ public class Pluralizer {
 /**
      * Creates a new Pluralizer object.
      *
-     * @param stringProvider
-     * @param separator
+     * @param stringProvider A non null instance of {@link FuzzyStringProvider}.
+     * @param separator The string, that separates the different plural forms in an internationalized message 
+     *                  from another. If the given value is null, the default separator 
+     *                  {@value #DEFAULT_PLURAL_SEPARATOR} ({@link #DEFAULT_PLURAL_SEPARATOR}) will be used.
+     * 
+     * @throws IllegalArgumentException Thrown, if the given <code>stringProvider</code> is <code>null.</code>
      */
     public Pluralizer(final FuzzyStringProvider stringProvider, final String separator) {
+        if (stringProvider == null) {
+            throw new IllegalArgumentException("Pluralizer requires a non-null FuzzyStringProvider.");
+        }
+
         this.fuzzyStringProvider = stringProvider;
-        this.separator = separator;
+
+        if (separator != null) {
+            this.separator = separator;
+        }
+
         ruleSelector = new I18nStringLookupRuleSelector(stringProvider, "plurals.mode");
     }
 
