@@ -14,6 +14,7 @@ import net.sf.jfuzzydate.i18n.ResourceBundleFSProvider;
  * @author amaasch
  */
 public final class DefaultFuzzingConfiguration implements FuzzingConfiguration {
+
     //~ Static fields/initializers ---------------------------------------------------------------------------
 
     /**
@@ -22,8 +23,7 @@ public final class DefaultFuzzingConfiguration implements FuzzingConfiguration {
     private static final DefaultFuzzingConfiguration INSTANCE = new DefaultFuzzingConfiguration();
 
     /**
-     * The internationalization resource bundle name for looking up the strings of this
-     * configuration.
+     * The internationalization resource bundle name for looking up the strings of this configuration.
      *
      * @see #getFuzzyString(Range, Locale, Object...)
      * @see #getFuzzyString(String, Locale, Object...)
@@ -31,11 +31,6 @@ public final class DefaultFuzzingConfiguration implements FuzzingConfiguration {
     private static final String FUZZY_STRING_BUNDLE = "net.sf.jfuzzydate.i18n.jFuzzyDate";
 
     //~ Instance fields --------------------------------------------------------------------------------------
-
-    /**
-     * The provider of the fuzzy strings.
-     */
-    private final FuzzyStringProvider fuzzyStrings = new ResourceBundleFSProvider(FUZZY_STRING_BUNDLE);
 
     /**
      * Normal distance configuration.
@@ -47,16 +42,23 @@ public final class DefaultFuzzingConfiguration implements FuzzingConfiguration {
      */
     private final Range[] dur_normal;
 
+    /**
+     * The provider of the fuzzy strings.
+     */
+    private final FuzzyStringProvider fuzzyStrings = new ResourceBundleFSProvider(FUZZY_STRING_BUNDLE);
+
     //~ Constructors -----------------------------------------------------------------------------------------
 
-/**
+    /**
      * Creates a new DefaultFuzzingConfiguration object.
      */
     private DefaultFuzzingConfiguration() {
-        final int min = 60;
-        final int hour = 60 * min;
-        final int day = 24 * hour;
-        final int week = 7 * day;
+        final long min = 60;
+        final long hour = 60 * min;
+        final long day = 24 * hour;
+        final long week = 7 * day;
+        final long year = 356 * day;
+        final long century = 100 * year;
 
         dur_normal = new Range[] {
                          new StaticRange(80, "duration.minute.1"), new StaticRange(140, "duration.minute.2"),
@@ -73,6 +75,8 @@ public final class DefaultFuzzingConfiguration implements FuzzingConfiguration {
                          new StaticRange(45 * day, "duration.month.1"),
                          new StaticRange(75 * day, "duration.month.2"),
                          new GenericRange(300 * day, "duration.numbered", Unit.MONTH),
+                         new GenericRange(100 * year, "duration.numbered", Unit.YEAR),
+                         new GenericRange(100 * century, "duration.numbered", Unit.CENTURY),
                          new Eternity("duration.eternal")
                      };
 
@@ -91,6 +95,9 @@ public final class DefaultFuzzingConfiguration implements FuzzingConfiguration {
                           new StaticRange(45 * day, "distance.month.1"),
                           new StaticRange(75 * day, "distance.month.2"),
                           new GenericRange(300 * day, "distance.numbered", Unit.MONTH),
+                          new StaticRange(400 * day, "distance.year.1"),
+                          new GenericRange(100 * year, "distance.numbered", Unit.YEAR),
+                          new GenericRange(100 * century, "distance.numbered", Unit.CENTURY),
                           new Eternity("distance.eternal")
                       };
     }
@@ -123,12 +130,14 @@ public final class DefaultFuzzingConfiguration implements FuzzingConfiguration {
                 break;
 
             case STRONG:
+
                 // TODO
                 ranges = dist_normal;
 
                 break;
 
             case EXTREME:
+
                 // TODO
                 ranges = dist_normal;
 
@@ -158,12 +167,14 @@ public final class DefaultFuzzingConfiguration implements FuzzingConfiguration {
                 break;
 
             case STRONG:
+
                 // TODO
                 ranges = dur_normal;
 
                 break;
 
             case EXTREME:
+
                 // TODO
                 ranges = dur_normal;
 
@@ -177,8 +188,8 @@ public final class DefaultFuzzingConfiguration implements FuzzingConfiguration {
     }
 
     /* (non-Javadoc)
-         * @see net.sf.jfuzzydate.FuzzingConfiguration#getStringProvider()
-         */
+     * @see net.sf.jfuzzydate.FuzzingConfiguration#getStringProvider()
+     */
     public FuzzyStringProvider getStringProvider() {
         return this.fuzzyStrings;
     }

@@ -15,10 +15,10 @@ import java.util.Locale;
  * Basic implementation for fuzzy date formatting.
  *
  * @author amaasch
- *
- * @see FuzzyDateFormatter
+ * @see    FuzzyDateFormatter
  */
 public class FuzzyDateFormatterImpl implements FuzzyDateFormatter {
+
     //~ Instance fields --------------------------------------------------------------------------------------
 
     /**
@@ -33,12 +33,10 @@ public class FuzzyDateFormatterImpl implements FuzzyDateFormatter {
 
     //~ Constructors -----------------------------------------------------------------------------------------
 
-/**
-     * Creates a new FuzzyDateFormatterImpl object with the specified
-     * configuration.
+    /**
+     * Creates a new FuzzyDateFormatterImpl object with the specified configuration.
      *
-     * @param config
-     *            the given configuration.
+     * @param config the given configuration.
      */
     public FuzzyDateFormatterImpl(final FuzzingConfiguration config) {
         this.config = config;
@@ -97,11 +95,10 @@ public class FuzzyDateFormatterImpl implements FuzzyDateFormatter {
     /*
      * (non-Javadoc)
      *
-     * @see net.sf.jfuzzydate.FuzzyDateFormatter#formatDuration(java.util.Date,
-     * java.util.Date, java.util.Locale)
+     * @see net.sf.jfuzzydate.FuzzyDateFormatter#formatDuration(long)
      */
-    public String formatDuration(final Date from, final Date to, final Locale locale) {
-        return formatDuration(to.getTime() - from.getTime(), locale);
+    public String formatDuration(final long milliSeconds) {
+        return formatDuration(milliSeconds, Locale.getDefault());
     }
 
     /*
@@ -117,15 +114,6 @@ public class FuzzyDateFormatterImpl implements FuzzyDateFormatter {
     /*
      * (non-Javadoc)
      *
-     * @see net.sf.jfuzzydate.FuzzyDateFormatter#formatDuration(long)
-     */
-    public String formatDuration(final long milliSeconds) {
-        return formatDuration(milliSeconds, Locale.getDefault());
-    }
-
-    /*
-     * (non-Javadoc)
-     *
      * @see net.sf.jfuzzydate.FuzzyDateFormatter#formatDuration(long,
      * java.util.Locale)
      */
@@ -133,12 +121,22 @@ public class FuzzyDateFormatterImpl implements FuzzyDateFormatter {
         return formatDuration(milliSeconds, FuzzingStrength.NORMAL, locale);
     }
 
+    /*
+     * (non-Javadoc)
+     *
+     * @see net.sf.jfuzzydate.FuzzyDateFormatter#formatDuration(java.util.Date,
+     * java.util.Date, java.util.Locale)
+     */
+    public String formatDuration(final Date from, final Date to, final Locale locale) {
+        return formatDuration(to.getTime() - from.getTime(), locale);
+    }
+
     /**
      * Formats a point in time. Not yet implemented.
      *
-     * @param distance todo
-     * @param strength the strength of the fuzzyfication.
-     * @param locale the locale for formatting.
+     * @param  distance todo
+     * @param  strength the strength of the fuzzyfication.
+     * @param  locale   the locale for formatting.
      *
      * @return a string representing a point in time in relation to the current time.
      */
@@ -149,17 +147,18 @@ public class FuzzyDateFormatterImpl implements FuzzyDateFormatter {
     /**
      * Formats a distance.
      *
-     * @param distanceSec a relative distance (number of milliseconds). Negative distances are assumed to be
-     *        past values.
-     * @param strength the strength of the fuzzyfication.
-     * @param locale the locale for formatting.
+     * @param  distanceSec a relative distance (number of milliseconds). Negative distances are assumed to be
+     *                     past values.
+     * @param  strength    the strength of the fuzzyfication.
+     * @param  locale      the locale for formatting.
      *
      * @return a string representing a readable distance.
      *
      * @throws IllegalStateException thrown if no range was found. Fix this by configuring an instance of
-     *         {@link Eternity} as last element in the list of ranges.
+     *                               {@link Eternity} as last element in the list of ranges.
      */
-    private String formatDistance(final long distanceSec, final FuzzingStrength strength, final Locale locale) {
+    private String formatDistance(final long distanceSec, final FuzzingStrength strength,
+                                  final Locale locale) {
         String tensePattern;
 
         if (distanceSec <= 0) {
@@ -182,10 +181,10 @@ public class FuzzyDateFormatterImpl implements FuzzyDateFormatter {
     /**
      * DOCUMENT ME!
      *
-     * @param locale
-     * @param tensePattern
-     * @param milliSeconds
-     * @param range
+     * @param  locale
+     * @param  tensePattern
+     * @param  milliSeconds
+     * @param  range
      *
      * @return
      */
@@ -195,37 +194,39 @@ public class FuzzyDateFormatterImpl implements FuzzyDateFormatter {
 
         if (range instanceof GenericRange) {
             final GenericRange genericRange = (GenericRange) range;
-            final float readableDistance = mapToGenericRange(milliSeconds, genericRange);
-            final int parameter = Math.round(readableDistance);
+            final long readableDistance = mapToGenericRange(milliSeconds, genericRange);
 
-            final String pluralizedUnit = pluralizer.pluralize(parameter,
+            final String pluralizedUnit = pluralizer.pluralize((int) readableDistance,
                                                                genericRange.getUnit().name().toLowerCase(),
                                                                locale);
             final String distanceString = fuzzyStrings.getString(range.getI18nKey(), locale,
                                                                  new Object[] {
-                                                                     String.valueOf(parameter), pluralizedUnit
+                                                                     String.valueOf(readableDistance),
+                                                                     pluralizedUnit
                                                                  });
 
             return fuzzyStrings.getString(tensePattern, locale, distanceString);
         }
 
-        return fuzzyStrings.getString(tensePattern, locale, fuzzyStrings.getString(range.getI18nKey(), locale));
+        return fuzzyStrings.getString(tensePattern, locale,
+                                      fuzzyStrings.getString(range.getI18nKey(), locale));
     }
 
     /**
      * Formats a duration.
      *
-     * @param milliSeconds the duration defined by a number of milliseconds. Negative distances are assumed
-     *        to be past values.
-     * @param strength the strength of the fuzzyfication.
-     * @param locale the locale for formatting.
+     * @param  milliSeconds the duration defined by a number of milliseconds. Negative distances are assumed
+     *                      to be past values.
+     * @param  strength     the strength of the fuzzyfication.
+     * @param  locale       the locale for formatting.
      *
      * @return a string representing a readable duration.
      *
      * @throws IllegalStateException thrown if no range was found. Fix this by configuring an instance of
-     *         {@link Eternity} as last element in the list of ranges.
+     *                               {@link Eternity} as last element in the list of ranges.
      */
-    private String formatDuration(final long milliSeconds, final FuzzingStrength strength, final Locale locale) {
+    private String formatDuration(final long milliSeconds, final FuzzingStrength strength,
+                                  final Locale locale) {
         for (final Range range : config.getDurationRanges(strength)) {
             if (range.contains(milliSeconds)) {
                 return formatDurationRange(milliSeconds, locale, range);
@@ -238,9 +239,9 @@ public class FuzzyDateFormatterImpl implements FuzzyDateFormatter {
     /**
      * DOCUMENT ME!
      *
-     * @param milliSeconds
-     * @param locale
-     * @param range
+     * @param  milliSeconds
+     * @param  locale
+     * @param  range
      *
      * @return
      */
@@ -249,9 +250,9 @@ public class FuzzyDateFormatterImpl implements FuzzyDateFormatter {
 
         if (range instanceof GenericRange) {
             final GenericRange genericRange = (GenericRange) range;
-            final int parameter = mapToGenericRange(milliSeconds, genericRange);
+            final long parameter = mapToGenericRange(milliSeconds, genericRange);
 
-            final String pluralizedUnit = pluralizer.pluralize(parameter,
+            final String pluralizedUnit = pluralizer.pluralize((int) parameter,
                                                                genericRange.getUnit().name().toLowerCase(),
                                                                locale);
 
@@ -265,12 +266,15 @@ public class FuzzyDateFormatterImpl implements FuzzyDateFormatter {
     /**
      * TODO DOCUMENT ME!
      *
-     * @param milliSeconds TODO DOCUMENT ME!
-     * @param genericRange TODO DOCUMENT ME!
+     * @param  milliSeconds TODO DOCUMENT ME!
+     * @param  genericRange TODO DOCUMENT ME!
      *
      * @return TODO DOCUMENT ME!
      */
-    private int mapToGenericRange(final long milliSeconds, final GenericRange genericRange) {
-        return Math.round(milliSeconds / (float) (genericRange.getUnit().getSeconds() * 1000));
+    private long mapToGenericRange(final long milliSeconds, final GenericRange genericRange) {
+        final long millisecondsPerUnit = genericRange.getUnit().getSeconds() * 1000;
+        final double mappedValue = milliSeconds / millisecondsPerUnit;
+
+        return Math.round(mappedValue);
     }
 }
