@@ -86,6 +86,8 @@ public class FuzzyDateFormatImplTest {
         testDistance("vor einer Woche", -SECONDS_DAY * 7, DE);
         testDistance("vor zwei Wochen", -SECONDS_DAY * 14, DE);
         testDistance("in 3 Wochen", SECONDS_DAY * 21, DE);
+        testDistance("vor 4 Monaten", -SECONDS_DAY * 130, DE);
+        testDistance("in einem Jahr", SECONDS_DAY * 400, DE);
     }
 
     /**

@@ -95,7 +95,8 @@ public final class DefaultFuzzingConfiguration implements FuzzingConfiguration {
                           new StaticRange(45 * day, "distance.month.1"),
                           new StaticRange(75 * day, "distance.month.2"),
                           new GenericRange(300 * day, "distance.numbered", Unit.MONTH),
-                          new StaticRange(400 * day, "distance.year.1"),
+                          new StaticRange(534 * day, "distance.year.1"),
+                          new StaticRange(890 * day, "distance.year.2"),
                           new GenericRange(100 * year, "distance.numbered", Unit.YEAR),
                           new GenericRange(100 * century, "distance.numbered", Unit.CENTURY),
                           new Eternity("distance.eternal")
