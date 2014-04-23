@@ -1,7 +1,10 @@
 package net.sf.jfuzzydate.impl;
 
+import org.junit.After;
+
 import static org.junit.Assert.assertEquals;
 
+import org.junit.Before;
 import org.junit.Test;
 
 import java.util.Date;
@@ -19,57 +22,81 @@ public class FuzzyDateFormatImplTest {
     //~ Static fields/initializers ---------------------------------------------------------------------------
 
     /**
-     * TODO DOCUMENT ME!
+     * The Constant DE.
      */
     private static final Locale DE = Locale.GERMAN;
 
     /**
-     * TODO DOCUMENT ME!
+     * The Constant EN.
      */
     private static final Locale EN = Locale.ENGLISH;
 
     /**
-     * TODO DOCUMENT ME!
+     * The Constant SECONDS_HOUR.
      */
     private static final int SECONDS_HOUR = 60 * 60;
 
     /**
-     * TODO DOCUMENT ME!
+     * The Constant SECONDS_DAY.
      */
     private static final long SECONDS_DAY = SECONDS_HOUR * 24;
 
     /**
-     * TODO DOCUMENT ME!
+     * The Constant SECONDS_YEAR.
      */
     private static final long SECONDS_YEAR = SECONDS_DAY * 356;
+
+    //~ Instance fields --------------------------------------------------------------------------------------
+
+    /**
+     * The {@link Locale}.
+     */
+    private Locale defaultLocale;
 
     //~ Methods ----------------------------------------------------------------------------------------------
 
     /**
-     * Test method for {@link net.sf.jfuzzydate.impl.FuzzyDateFormatterImpl#formatDistance(java.util.Date)}.
+     * Sets up the test case.
      */
-    @Test
-    public void testFormatDistanceDate() {
-        FuzzyDateFormatterImpl impl = new FuzzyDateFormatterImpl(DefaultFuzzingConfiguration.getInstance());
-        Date aMinuteAgo = new Date(new Date().getTime() - (30 * 1000));
-        Date in35Minutes = new Date(new Date().getTime() + (60 * 35 * 1000));
+    @Before public void setUp() {
+        defaultLocale = Locale.getDefault();
+        Locale.setDefault(Locale.JAPANESE);
+    }
+
+    /**
+     * Tear down.
+     */
+    @After public void tearDown() {
+        Locale.setDefault(defaultLocale);
+    }
+
+    /**
+     * Test method for {@link
+     * net.sf.jfuzzydate.impl.FuzzyDateFormatterImpl#formatDistance(java.util.Date)
+     * }.
+     */
+    @Test public void testFormatDistanceDate() {
+        final FuzzyDateFormatterImpl impl = new FuzzyDateFormatterImpl(DefaultFuzzingConfiguration
+                                                                       .getInstance());
+        final Date aMinuteAgo = new Date(new Date().getTime() - (30 * 1000));
+        final Date in35Minutes = new Date(new Date().getTime() + (60 * 35 * 1000));
 
         try {
             assertEquals(impl.formatDistance(aMinuteAgo),
                          impl.formatDistance(aMinuteAgo, Locale.getDefault()));
             assertEquals(impl.formatDistance(in35Minutes),
                          impl.formatDistance(in35Minutes, Locale.getDefault()));
-        } catch (MissingResourceException e) {
+        } catch (final MissingResourceException e) {
             // System.out.println("Warning: Resource for default locale not available for testing.");
         }
     }
 
     /**
-     * Test method for
-     * {@link net.sf.jfuzzydate.impl.FuzzyDateFormatterImpl#formatDistance(java.util.Date, java.util.Locale)}.
+     * Test method for {@link
+     * net.sf.jfuzzydate.impl.FuzzyDateFormatterImpl#formatDistance(java.util.Date,
+     * java.util.Locale)}.
      */
-    @Test
-    public void testFormatDistanceDateLocale() {
+    @Test public void testFormatDistanceDateLocale() {
         testDistance("a minute ago", -30, EN);
         testDistance("in a minute", 30, EN);
         testDistance("two minutes ago", -60 * 2, EN);
@@ -91,29 +118,13 @@ public class FuzzyDateFormatImplTest {
     }
 
     /**
-     * Test method for
-     * {@link net.sf.jfuzzydate.impl.FuzzyDateFormatterImpl#formatDuration(java.util.Date, java.util.Date, java.util.Locale)}
-     * .
+     * Test method for {@link
+     * net.sf.jfuzzydate.impl.FuzzyDateFormatterImpl#formatDuration(long,
+     * java.util.Locale)}.
      */
-    @Test
-    public void testFormatDurationDateDateLocale() {
-    }
-
-    /**
-     * Test method for
-     * {@link net.sf.jfuzzydate.impl.FuzzyDateFormatterImpl#formatDuration(java.util.Date, java.util.Locale)}.
-     */
-    @Test
-    public void testFormatDurationDateLocale() {
-    }
-
-    /**
-     * Test method for
-     * {@link net.sf.jfuzzydate.impl.FuzzyDateFormatterImpl#formatDuration(long, java.util.Locale)}.
-     */
-    @Test
-    public void testFormatDurationLongLocale() {
-        FuzzyDateFormatterImpl impl = new FuzzyDateFormatterImpl(DefaultFuzzingConfiguration.getInstance());
+    @Test public void testFormatDurationLongLocale() {
+        final FuzzyDateFormatterImpl impl = new FuzzyDateFormatterImpl(DefaultFuzzingConfiguration
+                                                                       .getInstance());
         assertEquals("a minute", impl.formatDuration(30 * 1000, EN));
         assertEquals("two minutes", impl.formatDuration(60 * 2 * 1000, EN));
         assertEquals("35 minutes", impl.formatDuration(60 * 35 * 1000, EN));
@@ -123,23 +134,15 @@ public class FuzzyDateFormatImplTest {
     }
 
     /**
-     * Test method for
-     * {@link net.sf.jfuzzydate.impl.FuzzyDateFormatterImpl#FuzzyDateFormatImpl(net.sf.jfuzzydate.impl.DefaultFuzzingConfiguration)}
-     * .
-     */
-    @Test
-    public void testFuzzyDateFormatImpl() {
-    }
-
-    /**
-     * TODO DOCUMENT ME!
+     * Test distance.
      *
-     * @param expectedString
+     * @param expectedString the expected string
      * @param seconds        l
-     * @param locale
+     * @param locale         the locale
      */
-    private void testDistance(String expectedString, long seconds, Locale locale) {
-        FuzzyDateFormatterImpl impl = new FuzzyDateFormatterImpl(DefaultFuzzingConfiguration.getInstance());
+    private void testDistance(final String expectedString, final long seconds, final Locale locale) {
+        final FuzzyDateFormatterImpl impl = new FuzzyDateFormatterImpl(DefaultFuzzingConfiguration
+                                                                       .getInstance());
 
         final long now = new Date().getTime();
 
