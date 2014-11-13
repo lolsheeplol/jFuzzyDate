@@ -104,6 +104,29 @@ public class PluralRuleTest {
         testSelector(rule, 3, 102);
         testSelector(rule, 3, 1003);
     }
+    
+    /**
+     * RULE7 Russian etc
+     */
+    @Test
+    public void testSelectPluralForm7() {
+        final PluralRule rule = RULE7;
+		testSelector(rule, 2, 0);
+        testSelector(rule, 0, 1);
+        testSelector(rule, 1, 2);
+        testSelector(rule, 1, 3);
+        testSelector(rule, 1, 4);
+        testSelector(rule, 1, 5);
+        testSelector(rule, 2, 10);
+        testSelector(rule, 2, 11);
+        testSelector(rule, 2, 12);
+        testSelector(rule, 2, 13);
+        testSelector(rule, 2, 14);
+        testSelector(rule, 2, 19);
+        testSelector(rule, 2, 20);
+
+    }
+
 
 
     

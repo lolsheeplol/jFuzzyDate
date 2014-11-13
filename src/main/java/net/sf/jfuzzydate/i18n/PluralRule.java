@@ -56,7 +56,7 @@ public enum PluralRule {
 			return pluralForm;
 		}
 	},
-	
+
 	/**
 	 * Plural rule #2 (2 forms)<br>
 	 * Families: Romanic (French, Brazilian Portuguese)<br>
@@ -79,7 +79,7 @@ public enum PluralRule {
 			return pluralForm;
 		}
 	},
-	
+
 	/**
 	 * Plural rule #3 (3 forms)<br>
 	 * Families: Baltic (Latvian)<br>
@@ -107,7 +107,7 @@ public enum PluralRule {
 			return pluralForm;
 		}
 	},
-	
+
 	/**
 	 * Plural rule #4 (4 forms)<br>
 	 * Families: Celtic (Scottish Gaelic)<br>
@@ -137,7 +137,7 @@ public enum PluralRule {
 			return pluralForm;
 		}
 	},
-	
+
 	RULE5 {
 		public int selectPluralForm(final int number) {
 			final int absNumber = Math.abs(number);
@@ -154,52 +154,72 @@ public enum PluralRule {
 			return pluralForm;
 		}
 	},
-	
+
 	RULE6 {
 		public int selectPluralForm(final int number) {
 			return 0;
 		}
 	},
+
 	RULE7 {
 		public int selectPluralForm(final int number) {
-			return 0;
+			final int absNumber = Math.abs(number);
+			int pluralForm;
+
+			if((absNumber != 11) && endsBetween(absNumber, 1, 1 ,1)) {
+				pluralForm = 0;
+			} else if ((absNumber < 12) && (absNumber > 14) && endsBetween(absNumber, 2, 4 ,1)) {
+				pluralForm = 1;
+			} else {
+				pluralForm = 2;
+			}
+
+			return pluralForm;
 		}
 	},
+
 	RULE8 {
 		public int selectPluralForm(final int number) {
 			return 0;
 		}
 	},
+
 	RULE9 {
 		public int selectPluralForm(final int number) {
 			return 0;
 		}
 	},
+
 	RULE10 {
 		public int selectPluralForm(final int number) {
 			return 0;
 		}
 	},
+
 	RULE11 {
 		public int selectPluralForm(final int number) {
 			return 0;
 		}
 	},
+
 	RULE12 {
 		public int selectPluralForm(final int number) {
 			return 0;
 		}
 	},
+
 	RULE13 {
 		public int selectPluralForm(final int number) {
 			return 0;
 		}
 	},
+
 	RULE14 {
 		public int selectPluralForm(final int number) {
 			return 0;
 		}
 	},
+
 	RULE15 {
 		public int selectPluralForm(final int number) {
 			return 0;
