@@ -116,7 +116,7 @@ public class PluralRuleTest {
         testSelector(rule, 1, 2);
         testSelector(rule, 1, 3);
         testSelector(rule, 1, 4);
-        testSelector(rule, 1, 5);
+        testSelector(rule, 2, 5);
         testSelector(rule, 2, 10);
         testSelector(rule, 2, 11);
         testSelector(rule, 2, 12);
@@ -124,12 +124,8 @@ public class PluralRuleTest {
         testSelector(rule, 2, 14);
         testSelector(rule, 2, 19);
         testSelector(rule, 2, 20);
-
     }
 
-
-
-    
     /**
      * TODO DOCUMENT ME!
      *

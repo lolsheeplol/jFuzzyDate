@@ -166,9 +166,9 @@ public enum PluralRule {
 			final int absNumber = Math.abs(number);
 			int pluralForm;
 
-			if((absNumber != 11) && endsBetween(absNumber, 1, 1 ,1)) {
+			if((absNumber != 11) && endsBetween(absNumber, 1, 1, 1)) {
 				pluralForm = 0;
-			} else if ((absNumber < 12) && (absNumber > 14) && endsBetween(absNumber, 2, 4 ,1)) {
+			} else if (((absNumber < 12) || (absNumber > 14)) && endsBetween(absNumber, 2, 4, 1)) {
 				pluralForm = 1;
 			} else {
 				pluralForm = 2;
