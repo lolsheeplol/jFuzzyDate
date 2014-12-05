@@ -2,7 +2,7 @@
   <modelVersion>4.0.0</modelVersion>
   <groupId>net.sf.jfuzzydate</groupId>
   <artifactId>jfuzzydate</artifactId>
-  <version>0.2.7</version>
+  <version>0.2.8</version>
   <name>jFuzzyDate</name>
   <description>Converts date, time and durations to more human readable string.	</description>
   <url>https://sourceforge.net/projects/jfuzzydate/</url>

@@ -64,7 +64,7 @@ public class ResourceBundleFSProvider implements FuzzyStringProvider {
         try {
             return bundle.getString(key);
         } catch (final MissingResourceException e) {
-            final ResourceBundle fallbackBundle = ResourceBundle.getBundle(bundleBaseName, Locale.ROOT);
+            final ResourceBundle fallbackBundle = ResourceBundle.getBundle(bundleBaseName, Locale.ENGLISH);
 
             return fallbackBundle.getString(key);
         }
