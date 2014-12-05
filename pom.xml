@@ -2,7 +2,7 @@
   <modelVersion>4.0.0</modelVersion>
   <groupId>net.sf.jfuzzydate</groupId>
   <artifactId>jfuzzydate</artifactId>
-  <version>0.2.6</version>
+  <version>0.2.7</version>
   <name>jFuzzyDate</name>
   <description>Converts date, time and durations to more human readable string.	</description>
   <url>https://sourceforge.net/projects/jfuzzydate/</url>
@@ -70,8 +70,8 @@
   			<artifactId>maven-compiler-plugin</artifactId>
   			<version>2.3.2</version>
   			<configuration>
-  				<source>1.5</source>
-        		<target>1.5</target>
+  				<source>1.6</source>
+        		<target>1.6</target>
   			</configuration>
   		</plugin>
 
