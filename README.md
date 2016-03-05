@@ -1,3 +1,3 @@
 # jFuzzyDate
 
-TODO add descrition here :)
+TODO add description here :)
