@@ -1,7 +1,7 @@
 package net.sf.jfuzzydate;
 
 /**
- * @author ma³
+ * @author maaa
  *
  */
 public enum FuzzingStrength {

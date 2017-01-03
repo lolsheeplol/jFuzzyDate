@@ -1,60 +1,42 @@
 package net.sf.jfuzzydate;
 
-import net.sf.jfuzzydate.impl.Range;
-
-import java.util.Locale;
-
-
 /**
  * An object that represents a configuration for date and duration fuzzing.
  * 
- * <p>A fuzzing configuration is a set of ranges which are mapped to 
- * internationalized strings. Each of these ranges represents a special human 
+ * <p>
+ * A fuzzing configuration is a set of ranges which are mapped to
+ * internationalized strings. Each of these ranges represents a special human
  * understanding of a distance of time or duration.
- *
- * @author ma³
-  */
+ * 
+ * @author amaasch
+ */
 public interface FuzzingConfiguration {
-    //~ Methods ----------------------------------------------------------------
+    //~ Methods ----------------------------------------------------------------------------------------------
 
     /**
-     * This method returns an array of range objects. These are used to
-     * map ranges of relative distances of time to internationalized readable
-     * strings.
+     * This method returns an array of range objects. These are used to map ranges of relative
+     * distances of time to internationalized readable strings.
      *
-     * @param strenght the fuzzing strength defining the granularity of ranges
-     *        to return.
+     * @param strenght the fuzzing strength defining the granularity of ranges to return.
      *
      * @return an array of ranges for distances of time.
      */
-    Range[] getDistanceRanges(FuzzingStrength strenght);
+    Range[] getDistanceRanges(final FuzzingStrength strenght);
 
     /**
-     * DOCUMENT ME!
+     * This method returns an array of range objects. These are used to map ranges of durations to
+     * internationalized readable strings.
      *
-     * @param strenght DOCUMENT ME!
+     * @param strenght the fuzzing strength defining the granularity of ranges to return.
      *
-     * @return DOCUMENT ME!
+     * @return an array of ranges for durations.
      */
-    Range[] getDurationRanges(FuzzingStrength strenght);
+    Range[] getDurationRanges(final FuzzingStrength strenght);
 
     /**
-     * DOCUMENT ME!
+     * Returns the configured fuzzy string builder instance.
      *
-     * @param range
-     * @param locale
-     *
-     * @return
+     * @return a FuzzyStringProvider object.
      */
-    String getFuzzyString(Range range, Locale locale, Object... params);
-
-    /**
-     * DOCUMENT ME!
-     *
-     * @param pattern
-     * @param locale
-     *
-     * @return
-     */
-    String getFuzzyString(String pattern, Locale locale, Object... params);
+    FuzzyStringProvider getStringProvider();
 }
