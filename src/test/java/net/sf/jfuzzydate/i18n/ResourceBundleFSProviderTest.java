@@ -81,4 +81,13 @@ public class ResourceBundleFSProviderTest {
             fail("Failed to initialize ResourceBundleFSProvider class");
         }
     }
+
+    /**
+     * In this test case we get fallback resource for not existing resource in locale "Chinese".
+     */
+    @Test
+    public void testResourceBundleFSProviderWithFallback() {
+        final ResourceBundleFSProvider resourceBundleFSProvider = new ResourceBundleFSProvider("net.sf.jfuzzydate.i18n.ResourceBundleFSProviderTest");
+        assertEquals("default", resourceBundleFSProvider.getString("fruit", Locale.CHINESE));
+    }
 }
