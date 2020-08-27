@@ -12,6 +12,39 @@ Maven:
 </dependency>
 ```
 
+Gradle:
+```gradle
+dependencies {
+  implementation 'net.sf.jfuzzydate:jfuzzydate:0.2.11'
+}
+```
+
+[jFuzzyDate jar downloads](https://search.maven.org/artifact/net.sf.jfuzzydate/jfuzzydate/0.2.11/jar) are available from Maven Central.
+
+
+### Example:
+```java
+@Test 
+public void testFormatDurationLongLocale() {
+    final FuzzyDateFormatterImpl impl = new FuzzyDateFormatterImpl( DefaultFuzzingConfiguration.getInstance());
+
+    assertEquals("a minute", impl.formatDuration(30 * 1000, EN));
+    assertEquals("two minutes", impl.formatDuration(60 * 2 * 1000, EN));
+    assertEquals("35 minutes", impl.formatDuration(60 * 35 * 1000, EN));
+    assertEquals("a day", impl.formatDuration(SECONDS_DAY * 1000, EN));
+    assertEquals("5 days", impl.formatDuration(SECONDS_DAY * 5 * 1000, EN));
+    assertEquals("a week", impl.formatDuration(SECONDS_DAY * 7 * 1000, EN));
+}
+
+private void testDistance(final String expectedString, final long seconds, final Locale locale) {
+    final FuzzyDateFormatterImpl impl = new FuzzyDateFormatterImpl( DefaultFuzzingConfiguration.getInstance());
+
+    final long now = new Date().getTime();
+
+    assertEquals(expectedString, impl.formatDistance(new Date(now + (seconds * 1000)), locale));
+}
+```
+
 ### Licence
 
 jFuzzyDate is released under the [GNU Lesser General Public License (LGPL)](http://www.gnu.org/licenses/lgpl.txt).
