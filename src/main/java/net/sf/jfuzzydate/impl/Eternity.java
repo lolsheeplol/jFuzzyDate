@@ -22,7 +22,7 @@ public final class Eternity implements Range {
     /**
      * Creates an eteranal range.
      * 
-     * @param i18nKey
+     * @param i18nKey the i18N key.
      */
     public Eternity(final String i18nKey) {
         internationalizationKey = i18nKey;

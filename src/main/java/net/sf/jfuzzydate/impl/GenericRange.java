@@ -35,9 +35,9 @@ public class GenericRange implements Range {
      * Creates a new GenericRange object with an upper binding and a reference
      * to an externalized string.
      *
-     * @param upperBoundSeconds
-     * @param i18nKey
-     * @param unit
+     * @param upperBoundSeconds the upper bound seconds
+     * @param i18nKey the i18n key
+     * @param unit the unit
      */
     public GenericRange(final long upperBoundSeconds, final String i18nKey,
                         final Unit unit) {

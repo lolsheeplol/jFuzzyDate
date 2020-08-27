@@ -41,7 +41,7 @@ public class Pluralizer {
 /**
      * Creates a new Pluralizer object.
      *
-     * @param stringProvider
+     * @param stringProvider the string provider
      * 
      * @throws IllegalArgumentException Thrown, if the given <code>stringProvider</code> is <code>null.</code>
      */

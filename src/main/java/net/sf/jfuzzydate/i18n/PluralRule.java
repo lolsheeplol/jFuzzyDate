@@ -3,14 +3,12 @@ package net.sf.jfuzzydate.i18n;
 /**
  * This enumeration specifies different rules and their behavior. It aims to
  * built a complete set of rules for all languages, but is not a mapping file
- * for rule<->locale.
+ * for rule locale.
  * <p>
- * Mostly derived from <a
- * href="https://developer.mozilla.org/en/Localization_and_Plurals">Mozilla
+ * Mostly derived from <a href="https://developer.mozilla.org/en/Localization_and_Plurals">Mozilla
  * developer community plural rule list</a> which itself references GNU gettext
- * documentation of <a href=
- * "http://www.gnu.org/software/gettext/manual/html_node/gettext_150.html#Plural
- * - forms">plural forms</a>.
+ * documentation of <a href="http://www.gnu.org/software/gettext/manual/html_node/gettext_150.html#Plural-forms">
+ * plural forms</a>.
  * <p>
  * Implementation still incomplete.
  * 

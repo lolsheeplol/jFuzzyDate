@@ -24,8 +24,8 @@ public class StaticRange implements Range {
     //~ Constructors -----------------------------------------------------------
 
 /**
-     * @param i
-     * @param string
+     * @param upperBoundSeconds the upper bound seconds
+     * @param i18nKey the i18N key
      */
     public StaticRange(final long upperBoundSeconds, final String i18nKey) {
         upperBound = upperBoundSeconds * 1000;

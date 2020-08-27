@@ -43,6 +43,7 @@ public interface FuzzyStringProvider {
      *
      * @param key the key to look up in the bundle.
      * @param locale the locale for which the string should be returned.
+     * @param params the objects
      *
      * @return the string for the key and locale formatted with the given params.
      */
