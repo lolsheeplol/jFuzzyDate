@@ -8,13 +8,15 @@ import org.junit.Test;
 public class FuzzingConfigurationTest {
 
     @Test
-    public void testFuzzingConfigurationInstanceNotNull() {
+    public void testDefaultFuzzingConfigurationInstanceSame() {
         FuzzingConfiguration instance = DefaultFuzzingConfiguration.getInstance();
-        Assert.assertNotNull(instance);
+        FuzzingConfiguration another = DefaultFuzzingConfiguration.getInstance();
+        Assert.assertSame(instance, another);
     }
 
     @Test
-    public void testFuzzingConfiguration() {
-
+    public void testFuzzingConfigurationInstanceNotNull() {
+        FuzzingConfiguration instance = DefaultFuzzingConfiguration.getInstance();
+        Assert.assertNotNull(instance);
     }
 }
