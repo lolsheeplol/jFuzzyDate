@@ -11,7 +11,7 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.Locale;
 
-public class FuzzyDateFormatterTests {
+public class FuzzyDateFormatterTest {
 
     // black-box test FuzzyDateFormatter interface
 

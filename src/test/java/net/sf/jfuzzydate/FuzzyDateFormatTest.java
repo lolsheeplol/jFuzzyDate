@@ -1,34 +1,19 @@
 package net.sf.jfuzzydate;
 
 import net.sf.jfuzzydate.impl.DefaultFuzzingConfiguration;
-import static org.junit.Assert.*;
-
+import org.junit.Assert;
 import org.junit.Test;
 
-
-/**
- * Tests {@link FuzzyDateFormat}
- *
- * @author amaasch
- */
 public class FuzzyDateFormatTest {
-    //~ Methods ----------------------------------------------------------------------------------------------
 
-    /**
-     * Tests {@link FuzzyDateFormat#getInstance()}
-     */
     @Test
-    public void testGetInstance() {
+    public void testFuzzyDateFormatInstance() {
         FuzzyDateFormatter instance = FuzzyDateFormat.getInstance();
-        assertNotNull(instance);
-    }
+        Assert.assertNotNull(instance);
 
-    /**
-     * Tests {@link FuzzyDateFormat#getInstance(FuzzingConfiguration)}
-     */
-    @Test
-    public void testGetInstanceFuzzingConfiguration() {
-        FuzzyDateFormatter instance = FuzzyDateFormat.getInstance(DefaultFuzzingConfiguration.getInstance());
-        assertNotNull(instance);
+        FuzzyDateFormatter another = FuzzyDateFormat.getInstance(DefaultFuzzingConfiguration.getInstance());
+        Assert.assertNotNull(another);
+
+        // do we need to compare the instances?
     }
 }
