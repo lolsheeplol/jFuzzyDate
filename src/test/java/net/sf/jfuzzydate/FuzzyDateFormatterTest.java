@@ -30,6 +30,15 @@ public class FuzzyDateFormatterTest {
 
     @Test
     public void testFormat() {
+        Date now = new Date();
+
+        String expected = "one second";
+        Assert.assertEquals(expected, formatter.format(now));
+        Assert.assertEquals(expected, formatter.format(now, Locale.ENGLISH));
+    }
+
+    @Test
+    public void testFormatUnimplemented() {
         // known to be 'not implemented'
         Date now = new Date();
         Assert.assertEquals("not implemented", formatter.format(now));
