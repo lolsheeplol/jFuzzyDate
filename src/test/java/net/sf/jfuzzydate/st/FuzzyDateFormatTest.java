@@ -1,5 +1,7 @@
-package net.sf.jfuzzydate;
+package net.sf.jfuzzydate.st;
 
+import net.sf.jfuzzydate.FuzzyDateFormat;
+import net.sf.jfuzzydate.FuzzyDateFormatter;
 import net.sf.jfuzzydate.impl.DefaultFuzzingConfiguration;
 import org.junit.Assert;
 import org.junit.Test;

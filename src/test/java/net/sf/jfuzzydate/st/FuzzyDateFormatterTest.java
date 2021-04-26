@@ -1,5 +1,6 @@
-package net.sf.jfuzzydate;
+package net.sf.jfuzzydate.st;
 
+import net.sf.jfuzzydate.FuzzyDateFormatter;
 import net.sf.jfuzzydate.impl.DefaultFuzzingConfiguration;
 import net.sf.jfuzzydate.impl.FuzzyDateFormatterImpl;
 import org.junit.Assert;
@@ -16,7 +17,7 @@ public class FuzzyDateFormatterTest {
     // black-box test FuzzyDateFormatter interface
 
     private static FuzzyDateFormatter formatter;
-    private static Date today;
+    private static Date now;
 
     @BeforeClass
     public static void beforeAll() {
@@ -25,7 +26,7 @@ public class FuzzyDateFormatterTest {
 
     @Before
     public void beforeTests() {
-        today = new Date(2021, Calendar.APRIL, 24);
+        now = new Date();
     }
 
     @Test
