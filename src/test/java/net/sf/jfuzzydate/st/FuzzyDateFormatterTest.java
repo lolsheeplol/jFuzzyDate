@@ -69,6 +69,10 @@ public class FuzzyDateFormatterTest {
         Assert.assertEquals(expected, formatter.formatDuration(millis, Locale.ENGLISH));
     }
 
+    private void assertEqualsFormatDurationFromTo(String expected, Date from, Date to) {
+        Assert.assertEquals(expected, formatter.formatDuration(from, to, Locale.ENGLISH));
+    }
+
     @Test
     public void testFormatDurationDateSeconds() {
         // seconds
@@ -212,6 +216,36 @@ public class FuzzyDateFormatterTest {
         assertEqualsFormatDurationMillis("a week", WEEKS);
         assertEqualsFormatDurationMillis("a month", MONTHS);
         assertEqualsFormatDurationMillis("1 year", YEARS);
+    }
+
+    @Test
+    public void testFormatDurationFromToDate() {
+        Date mSec2 = new Date(now.getTime() - 2 * SECONDS);
+        Date mMin30 = new Date(now.getTime() - 30 * MINUTES);
+        Date mHour12 = new Date(now.getTime() - 12 * HOURS);
+        Date mDay1 = new Date(now.getTime() - 1 * DAYS);
+        Date mWeek2 = new Date(now.getTime() - 2 * WEEKS);
+        Date mMonth6 = new Date(now.getTime() - 6 * MONTHS);
+        Date mYear2 = new Date(now.getTime() - 2 * YEARS);
+
+        assertEqualsFormatDurationFromTo("a minute", mSec2, now);
+        assertEqualsFormatDurationFromTo("30 minutes", mMin30, now);
+        assertEqualsFormatDurationFromTo("12 hours", mHour12, now);
+        assertEqualsFormatDurationFromTo("a day", mDay1, now);
+        assertEqualsFormatDurationFromTo("two weeks", mWeek2, now);
+        assertEqualsFormatDurationFromTo("6 months", mMonth6, now);
+        assertEqualsFormatDurationFromTo("2 years", mYear2, now);
+    }
+
+    @Test
+    public void testFormatDurationDateInFuture() {
+        Date pSec1 = new Date(now.getTime() + 1 * SECONDS);
+        Date pMin1 = new Date(now.getTime() + 1 * MINUTES);
+        Date pHour1 = new Date(now.getTime() + 1 * HOURS);
+
+        assertEqualsFormatDuration("a minute", pSec1);
+        assertEqualsFormatDuration("a minute", pMin1);
+        assertEqualsFormatDuration("an hour", pHour1);
     }
 
     @Test
