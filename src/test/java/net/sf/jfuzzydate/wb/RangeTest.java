@@ -2,6 +2,7 @@ package net.sf.jfuzzydate.wb;
 
 import net.sf.jfuzzydate.Unit;
 import net.sf.jfuzzydate.impl.GenericRange;
+import net.sf.jfuzzydate.impl.StaticRange;
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -48,5 +49,22 @@ public class RangeTest {
 
         Assert.assertTrue(range.contains(-1));
         Assert.assertTrue(range.contains(-1000));
+    }
+
+    @Test
+    public void testStaticRangeKey() {
+        final String key = "foorbar";
+        StaticRange range = new StaticRange(10, key);
+        Assert.assertNotNull(range.getI18nKey());
+        Assert.assertEquals(key, range.getI18nKey());
+    }
+
+    @Test
+    public void testStaticRangeContains() {
+        final int bound = 100;
+        StaticRange range = new StaticRange(bound, "foobar");
+
+        Assert.assertTrue(range.contains(10 * 1000));
+        Assert.assertFalse(range.contains(100 * 1000));
     }
 }
