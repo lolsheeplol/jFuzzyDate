@@ -1,4 +1,4 @@
-package net.sf.jfuzzydate.st;
+package net.sf.jfuzzydate.wb;
 
 import net.sf.jfuzzydate.Unit;
 import net.sf.jfuzzydate.impl.GenericRange;
