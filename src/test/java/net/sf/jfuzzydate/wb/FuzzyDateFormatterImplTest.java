@@ -1,5 +1,6 @@
 package net.sf.jfuzzydate.wb;
 
+import net.sf.jfuzzydate.FuzzingConfiguration;
 import net.sf.jfuzzydate.FuzzyDateFormatter;
 import net.sf.jfuzzydate.impl.DefaultFuzzingConfiguration;
 import net.sf.jfuzzydate.impl.FuzzyDateFormatterImpl;
@@ -7,8 +8,8 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
+import org.junit.function.ThrowingRunnable;
 
-import java.util.Calendar;
 import java.util.Date;
 import java.util.Locale;
 
@@ -109,4 +110,29 @@ public class FuzzyDateFormatterImplTest {
         Assert.assertEquals("not implemented", formatter.format(now, Locale.ENGLISH));
     }
 
+    @Test
+    public void testFormatDurationThrowsExceptionWithPluralizer() {
+        FuzzingConfiguration badConfig = new BadPluralizerFuzzingConfiguration();
+        final FuzzyDateFormatter formatter = new FuzzyDateFormatterImpl(badConfig);
+
+        Assert.assertThrows(IllegalArgumentException.class, new ThrowingRunnable() {
+            @Override
+            public void run() throws Throwable {
+                formatter.formatDuration(new Date());
+            }
+        });
+    }
+
+    @Test
+    public void testFormatDurationThrowsExceptionWithBadRange() {
+        FuzzingConfiguration badConfig = new BadRangeFuzzingConfiguration();
+        final FuzzyDateFormatter formatter = new FuzzyDateFormatterImpl(badConfig);
+
+        Assert.assertThrows(IllegalStateException.class, new ThrowingRunnable() {
+            @Override
+            public void run() throws Throwable {
+                formatter.formatDuration(new Date());
+            }
+        });
+    }
 }
