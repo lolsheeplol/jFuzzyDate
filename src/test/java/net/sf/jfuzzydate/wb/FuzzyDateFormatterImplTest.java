@@ -1,4 +1,4 @@
-package net.sf.jfuzzydate.st;
+package net.sf.jfuzzydate.wb;
 
 import net.sf.jfuzzydate.FuzzyDateFormatter;
 import net.sf.jfuzzydate.impl.DefaultFuzzingConfiguration;
@@ -49,16 +49,49 @@ public class FuzzyDateFormatterImplTest {
         Assert.assertEquals(expected, formatter.formatDuration(from, to, Locale.ENGLISH));
     }
 
+    @Test
+    public void testFormatDurationDateSeconds() {
+        Date mSec30 = new Date(now.getTime() - 30 * SECONDS);
+        assertEqualsFormatDuration("a minute", mSec30);
+    }
+
+    @Test
+    public void testFormatDurationMillis() {
+        long millisecond = 1;
+        assertEqualsFormatDurationMillis("a minute", millisecond);
+    }
+
     private void assertFormatDistance(String expected, Date date) {
         Assert.assertEquals(expected, formatter.formatDistance(date));
         Assert.assertEquals(expected, formatter.formatDistance(date, Locale.ENGLISH));
     }
 
     @Test
+    public void testFormatDurationFromToDate() {
+        Date mHour12 = new Date(now.getTime() - 12 * HOURS);
+        assertEqualsFormatDurationFromTo("12 hours", mHour12, now);
+    }
+
+    @Test
     public void testFormatDistanceInFuture() {
         long time = now.getTime();
+        Date sec1 = new Date(time + 1 * SECONDS);
+        Date min2 = new Date(time + 2 * MINUTES);
         Date hour = new Date(time + 1 * HOURS);
+        Date day = new Date(time + 1 * DAYS);
+        Date week = new Date(time + 1 * WEEKS);
+        Date month = new Date(time + 1 * MONTHS);
+        Date year = new Date(time + 1 * YEARS);
+        Date year100 = new Date(time + 100 * YEARS);
+
+        assertFormatDistance("in a minute", sec1);
+        assertFormatDistance("in two minutes", min2);
         assertFormatDistance("in an hour", hour);
+        assertFormatDistance("in a day", day);
+        assertFormatDistance("in a week", week);
+        assertFormatDistance("in a month", month);
+        assertFormatDistance("in a year", year);
+        assertFormatDistance("in a century", year100);
     }
 
     @Test
@@ -66,6 +99,14 @@ public class FuzzyDateFormatterImplTest {
         long time = now.getTime();
         Date hour = new Date(time - 1 * HOURS);
         assertFormatDistance("an hour ago", hour);
+    }
+
+    @Test
+    public void testFormatUnimplemented() {
+        // known to be 'not implemented'
+        Date now = new Date();
+        Assert.assertEquals("not implemented", formatter.format(now));
+        Assert.assertEquals("not implemented", formatter.format(now, Locale.ENGLISH));
     }
 
 }
