@@ -13,6 +13,9 @@ public class DemoTest {
      * FuzzyDateFormatter.formatDuration(Date date)
      *
      *
+     * FuzzyDateFormatter.formatDuration(long millis)
+     *
+     *
      * FuzzyDateFormatter.formatDistance(Date date)
      *
      *
@@ -28,6 +31,7 @@ public class DemoTest {
         Date lastWeek = new Date(now.getTime() - 7 * DAY);
         Date twoDays = new Date(now.getTime() + 2 * DAY);
 
+        System.out.println("formatDuration(Date)");
         // "a day"
         System.out.println(formatter.formatDuration(yesterday));
         // "6 days"
@@ -37,6 +41,13 @@ public class DemoTest {
 
         System.out.println("----------");
 
+        System.out.println("formatDuration(long millis)");
+        // "a day"
+        System.out.println(formatter.formatDuration(DAY));
+
+        System.out.println("----------");
+
+        System.out.println("formatDistance(Date)");
         // "a day ago"
         System.out.println(formatter.formatDistance(yesterday));
         // "a week ago"
