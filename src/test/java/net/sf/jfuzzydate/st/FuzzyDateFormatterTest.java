@@ -248,8 +248,30 @@ public class FuzzyDateFormatterTest {
         assertEqualsFormatDuration("an hour", pHour1);
     }
 
+    private void assertFormatDistance(String expected, Date date) {
+        Assert.assertEquals(expected, formatter.formatDistance(date));
+        Assert.assertEquals(expected, formatter.formatDistance(date, Locale.ENGLISH));
+    }
+
     @Test
     public void testFormatDistance() {
+        long time = now.getTime();
+        Date sec1 = new Date(time + 1 * SECONDS);
+        Date min2 = new Date(time + 2 * MINUTES);
+        Date hour = new Date(time + 1 * HOURS);
+        Date day = new Date(time + 1 * DAYS);
+        Date week = new Date(time + 1 * WEEKS);
+        Date month = new Date(time + 1 * MONTHS);
+        Date year = new Date(time + 1 * YEARS);
+        Date year100 = new Date(time + 100 * YEARS);
 
+        assertFormatDistance("in a minute", sec1);
+        assertFormatDistance("in two minutes", min2);
+        assertFormatDistance("in an hour", hour);
+        assertFormatDistance("in a day", day);
+        assertFormatDistance("in a week", week);
+        assertFormatDistance("in a months", month);
+        assertFormatDistance("in 1 year", year);
+        assertFormatDistance("in a century", year100);
     }
 }
