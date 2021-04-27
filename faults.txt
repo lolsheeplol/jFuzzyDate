@@ -1,0 +1,5 @@
+
+## Discovered Faults
+
+- `FuzzyDateFormatter.format(Date)` is not implemented (always returns string "not implmented"
+- `FuzzyDateFormatter.formatDuration(Date)` with a `Date` that is in the future always returns "a minute"
