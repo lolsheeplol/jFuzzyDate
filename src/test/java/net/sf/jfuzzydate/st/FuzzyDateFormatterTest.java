@@ -64,6 +64,11 @@ public class FuzzyDateFormatterTest {
         Assert.assertEquals(expected, formatter.formatDuration(date, Locale.ENGLISH));
     }
 
+    private void assertEqualsFormatDurationMillis(String expected, long millis) {
+        Assert.assertEquals(expected, formatter.formatDuration(millis));
+        Assert.assertEquals(expected, formatter.formatDuration(millis, Locale.ENGLISH));
+    }
+
     @Test
     public void testFormatDurationDateSeconds() {
         // seconds
@@ -197,7 +202,16 @@ public class FuzzyDateFormatterTest {
 
     @Test
     public void testFormatDurationMillis() {
+        long millisecond = 1;
 
+        assertEqualsFormatDurationMillis("a minute", millisecond);
+        assertEqualsFormatDurationMillis("a minute", SECONDS);
+        assertEqualsFormatDurationMillis("a minute", MINUTES);
+        assertEqualsFormatDurationMillis("an hour", HOURS);
+        assertEqualsFormatDurationMillis("a day", DAYS);
+        assertEqualsFormatDurationMillis("a week", WEEKS);
+        assertEqualsFormatDurationMillis("a month", MONTHS);
+        assertEqualsFormatDurationMillis("1 year", YEARS);
     }
 
     @Test
