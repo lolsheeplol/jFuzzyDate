@@ -9,7 +9,7 @@ public class RangeTest {
 
     @Test
     public void testRangeKey() {
-        String key = "foobar";
+        final String key = "foobar";
         GenericRange range = new GenericRange(10, key, Unit.SECOND);
         Assert.assertNotNull(range.getI18nKey());
         Assert.assertEquals(key, range.getI18nKey());
@@ -17,7 +17,7 @@ public class RangeTest {
 
     @Test
     public void testRangeUnit() {
-        Unit unit = Unit.SECOND;
+        final Unit unit = Unit.SECOND;
         GenericRange range = new GenericRange(100, "foobar", unit);
         Assert.assertNotNull(range.getUnit());
         Assert.assertEquals(unit, range.getUnit());
@@ -25,6 +25,7 @@ public class RangeTest {
     @Test
     public void testRangeContains() {
         GenericRange range = new GenericRange(60, "foobar", Unit.SECOND);
+
         Assert.assertTrue(range.contains(0));
         Assert.assertTrue(range.contains(1000));
         Assert.assertTrue(range.contains(59 * 1000));
@@ -36,5 +37,16 @@ public class RangeTest {
         Assert.assertTrue(range.contains(-59 * 1000));
         Assert.assertTrue(range.contains(-60 * 1000));
         Assert.assertTrue(range.contains(-1000 * 1000));
+    }
+
+    @Test
+    public void testRangeContainsUpperBoundZero() {
+        GenericRange range = new GenericRange(0, "foobar", Unit.SECOND);
+
+        Assert.assertFalse(range.contains(0));
+        Assert.assertFalse(range.contains(1));
+
+        Assert.assertTrue(range.contains(-1));
+        Assert.assertTrue(range.contains(-1000));
     }
 }
