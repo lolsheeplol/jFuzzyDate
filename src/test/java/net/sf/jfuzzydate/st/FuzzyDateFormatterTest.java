@@ -254,7 +254,7 @@ public class FuzzyDateFormatterTest {
     }
 
     @Test
-    public void testFormatDistance() {
+    public void testFormatDistanceInFuture() {
         long time = now.getTime();
         Date sec1 = new Date(time + 1 * SECONDS);
         Date min2 = new Date(time + 2 * MINUTES);
@@ -270,8 +270,31 @@ public class FuzzyDateFormatterTest {
         assertFormatDistance("in an hour", hour);
         assertFormatDistance("in a day", day);
         assertFormatDistance("in a week", week);
-        assertFormatDistance("in a months", month);
-        assertFormatDistance("in 1 year", year);
+        assertFormatDistance("in a month", month);
+        assertFormatDistance("in a year", year);
         assertFormatDistance("in a century", year100);
     }
+
+    @Test
+    public void testFormatDistanceInPast() {
+        long time = now.getTime();
+        Date sec1 = new Date(time - 1 * SECONDS);
+        Date min2 = new Date(time - 2 * MINUTES);
+        Date hour = new Date(time - 1 * HOURS);
+        Date day = new Date(time - 1 * DAYS);
+        Date week = new Date(time - 1 * WEEKS);
+        Date month = new Date(time - 1 * MONTHS);
+        Date year = new Date(time - 1 * YEARS);
+        Date year100 = new Date(time - 100 * YEARS);
+
+        assertFormatDistance("a minute ago", sec1);
+        assertFormatDistance("two minutes ago", min2);
+        assertFormatDistance("an hour ago", hour);
+        assertFormatDistance("a day ago", day);
+        assertFormatDistance("a week ago", week);
+        assertFormatDistance("a month ago", month);
+        assertFormatDistance("a year ago", year);
+        assertFormatDistance("1 century ago", year100);
+    }
+
 }

@@ -3,3 +3,5 @@
 
 - `FuzzyDateFormatter.format(Date)` is not implemented (always returns string "not implmented"
 - `FuzzyDateFormatter.formatDuration(Date)` with a `Date` that is in the future always returns "a minute"
+- `FuzzyDateFormatter.formatDistance(Date)` for future Dates may have an issue with rounding down.
+    - Dates that are, for example, exactly 7 days in the future may return "in 6 days" instead of "in a week"
