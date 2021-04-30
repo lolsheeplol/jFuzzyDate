@@ -1,6 +1,7 @@
 ## The SUT (as used in the testing process).
 
 Can be located in the src/test/java/net/sf/jfuzzydate directory.
+Faults that we discovered can be found in "faults.txt".
 
 
 ## Step-by-step instructions on how to run the tests
@@ -32,5 +33,6 @@ Disable the following tests by commenting out the "@Test" annotation
     - `FuzzyDateFormatterTest.testFormatDistanceInFuture()`
     - `FuzzyDateFormatterImplTest.testFormatDistanceInFuture()`
 
-
 Then, run the configuration "PIT Runner" by selecting it from the run config dropdown.  
+
+A detailed mutation test report can then be found under the "target/report/" folder.
