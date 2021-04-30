@@ -113,10 +113,12 @@ public class FuzzyDateFormatterImplTest {
 
     @Test
     public void testFormatDurationThrowsExceptionWithPluralizer() {
+        final FuzzingConfiguration badConfig = new BadPluralizerFuzzingConfiguration();
+
         Assert.assertThrows(IllegalArgumentException.class, new ThrowingRunnable() {
             @Override
             public void run() throws Throwable {
-                FuzzingConfiguration badConfig = new BadPluralizerFuzzingConfiguration();
+                FuzzyDateFormatter formatter = new FuzzyDateFormatterImpl(badConfig);
             }
         });
     }

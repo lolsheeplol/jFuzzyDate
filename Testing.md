@@ -1,25 +1,36 @@
-1. Testing artifacts/tools if any (developed/used in the testing process)
-   
-PIT Mutation Testing, JUnit
+## The SUT (as used in the testing process).
+
+Can be located in the src/test/java/net/sf/jfuzzydate directory.
 
 
-2. The SUT (as used in the testing process). 
+## Step-by-step instructions on how to run the tests
 
-Can be located in the src/main/java/net.sf.jfuzzydate directory.
+We used JUnit, its coverage tools, and PIT runner to run our blackbox, 
+whitebox, and mutation tests.  ALl tools were run inside of IntelliJ, and 
+the run configurations to run tests are included in the project under
+".idea/runConfigurations".
 
-3. Test files and/or scripts, configuration files, tools etc. (needed to execute and reproduce the reported results).
-   
-Can be located in the src/test/java/net.sf.jfuzzydate directory.
+### Running blackbox tests
 
-4. Presentation slides and any additional documents, generated reports etc. that you like to include.
-   
-Included in .zip file.
+Run the run configuration "blackbox" by selecting it from the run config 
+dropdown.  This will run all tests inside the "net.sf.jfuzzydate.st" package
 
-5. [If applicable] A step-by-step instruction how to run the tests against the SUT and reproduce the results presented in the final presentation/live demo.
+### Running whitebox tests
 
-a. 
-b.
-c.
+Run the run configuration "whitebox" by selecting it from the run config
+dropdown.  This will run all tests inside the "net.sf.jfuzzydate.wb" package
 
-6. [If applicable] Screenshots of the running tests and the achieved results.
+### Running PIT mutation tests
 
+We installed an IntelliJ plugin called PIT Runner to easily run mutation tests.
+To install it, download the plugin here: https://plugins.jetbrains.com/plugin/7119-pit-mutation-testing-idea-plugin
+Or, search for "PIT Runner" in the plugins window.  
+
+Once PIT Runner has been installed, we first have to disable failing tests so that PIT can run.
+Disable the following tests by commenting out the "@Test" annotation
+    - `FuzzyDateFormatterTest.testFormatDurationDateInFuture()`
+    - `FuzzyDateFormatterTest.testFormatDistanceInFuture()`
+    - `FuzzyDateFormatterImplTest.testFormatDistanceInFuture()`
+
+
+Then, run the configuration "PIT Runner" by selecting it from the run config dropdown.  
