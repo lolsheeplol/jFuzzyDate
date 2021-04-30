@@ -41,16 +41,6 @@ public class FuzzyDateFormatterTest {
         now = new Date();
     }
 
-    // TODO: enable
-    // @Test
-    public void testFormat() {
-        Date now = new Date();
-
-        String expected = "one second";
-        Assert.assertEquals(expected, formatter.format(now));
-        Assert.assertEquals(expected, formatter.format(now, Locale.ENGLISH));
-    }
-
     @Test
     public void testFormatUnimplemented() {
         // known to be 'not implemented'
@@ -237,6 +227,7 @@ public class FuzzyDateFormatterTest {
         assertEqualsFormatDurationFromTo("2 years", mYear2, now);
     }
 
+    // TODO: Comment @Test when running PIT mutation tests
     @Test
     public void testFormatDurationDateInFuture() {
         Date pSec1 = new Date(now.getTime() + 1 * SECONDS);
@@ -253,6 +244,7 @@ public class FuzzyDateFormatterTest {
         Assert.assertEquals(expected, formatter.formatDistance(date, Locale.ENGLISH));
     }
 
+    // TODO: Comment @Test when running PIT mutation tests
     @Test
     public void testFormatDistanceInFuture() {
         long time = now.getTime();

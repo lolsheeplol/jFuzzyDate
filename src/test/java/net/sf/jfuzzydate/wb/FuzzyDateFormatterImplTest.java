@@ -73,6 +73,7 @@ public class FuzzyDateFormatterImplTest {
         assertEqualsFormatDurationFromTo("12 hours", mHour12, now);
     }
 
+    // TODO: Comment @Test when running PIT mutation tests
     @Test
     public void testFormatDistanceInFuture() {
         long time = now.getTime();
@@ -110,16 +111,12 @@ public class FuzzyDateFormatterImplTest {
         Assert.assertEquals("not implemented", formatter.format(now, Locale.ENGLISH));
     }
 
-    // TODO: debug
-    //@Test
+    @Test
     public void testFormatDurationThrowsExceptionWithPluralizer() {
-        FuzzingConfiguration badConfig = new BadPluralizerFuzzingConfiguration();
-        final FuzzyDateFormatter formatter = new FuzzyDateFormatterImpl(badConfig);
-
         Assert.assertThrows(IllegalArgumentException.class, new ThrowingRunnable() {
             @Override
             public void run() throws Throwable {
-                formatter.formatDuration(new Date());
+                FuzzingConfiguration badConfig = new BadPluralizerFuzzingConfiguration();
             }
         });
     }
